@@ -1,0 +1,13 @@
+.aboutus{
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    height: 500px;
+}
+
+#img{
+    width: 150px;
+    height: 100px;
+}
