@@ -6,6 +6,8 @@ import { Header } from './component/Header'
 import Footer from './component/Footer'
 import Content from './component/Content'
 import { AboutUs } from './component/AboutUs'
+import { ArrayDemo } from './component/ArrayDemo'
+import { UseStateDemo } from './component/UseStateDemo'
 function App() {
   // Js ralated code will be here
 // var   male=true;
@@ -13,10 +15,13 @@ function App() {
   return (
     <div>
     {/* HTML RELATED CODE WILL BE HERE */}
- <Header></Header>
+    <UseStateDemo></UseStateDemo>
+ {/* <Header></Header>
  <Content></Content>
  <AboutUs></AboutUs>
- <Footer></Footer>
+ <Footer></Footer> */}
+ {/* <ArrayDemo></ArrayDemo> */}
+ 
 
       
       </div>
