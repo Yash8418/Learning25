@@ -1,0 +1,42 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: black;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 15px 30px;
+    background-color: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  
+  .nav-link:hover {
+    background-color: #e2e6ea;
+  }
+  
+  /* Dashboard Content */
+  .dashboard-content {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .dashboard-content h3 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

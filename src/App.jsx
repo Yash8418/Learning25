@@ -7,6 +7,7 @@ import axios from "axios";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 import { DeveloperDashboard } from "./components/Developer/DeveloperDashboard";
 import { ProjectManagerDashboard } from "./components/ProjectManager/ProjectManagerDashboard";
+import { AddProject } from "./components/Admin/AddProject";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
@@ -24,7 +25,7 @@ function App() {
           <Route path="/developer/dashboard" element={<DeveloperDashboard/>} />
           <Route path="/ProjectManager" element={<Navigate to="/ProjectManager/dashboard" />} />
           <Route path="/ProjectManager/dashboard" element={<ProjectManagerDashboard/>} />
-        
+          <Route path="/admin/addProject" element={<AddProject></AddProject>} />
         </Routes>
         {/* <Routes>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />

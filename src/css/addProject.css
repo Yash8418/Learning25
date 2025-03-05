@@ -1,0 +1,68 @@
+.add-project-container {
+    width: 100%;
+    max-width: 900px;
+    /* margin: 50px auto; */
+    background: white;
+    padding: 10px; /* Reduced padding */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Center everything */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+/* Typography - Smaller font */
+h1 {
+    text-align: center;
+    font-size: 15px; /* Reduced from 24px */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Form Layout */
+.form-group {
+    margin-bottom: 11px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px; /* Reduced from 14px */
+    margin-bottom: 3px;
+    color: #444;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px; /* Slightly reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px; /* Reduced from 14px */
+    background: white;
+    color: black;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 10px; /* Slightly reduced */
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    font-size: 14px; /* Reduced from 16px */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
