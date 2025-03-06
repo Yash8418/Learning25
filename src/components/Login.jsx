@@ -14,6 +14,8 @@ const Login = () => {
       
       const res = await axios.post("/login", data);
       console.log("API Response:", res.data);
+      // console.log(res.data.user._id); //axios
+
 
       if (res.status === 200) {
         if (res.data.Message === "User FOUND successfully") {
