@@ -23,7 +23,7 @@ export const AdminDashboard = () => {
           </div>
           <div className="card">
             <h3>Hours This Week</h3>
-            <p>35</p>
+            <p>0</p>
           </div>
         </div>
 
@@ -32,10 +32,7 @@ export const AdminDashboard = () => {
           <div className="weekly-chart">[Graph Placeholder]</div>
         </div>
 
-        <div className="success-message">
-          <strong>Login successful</strong>
-          <p>Welcome back, admin!</p>
-        </div>
+        
       </div>
     </div>
   );
