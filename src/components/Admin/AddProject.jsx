@@ -28,7 +28,7 @@ export const AddProject = () => {
     return (
       <div>
           <Navbar /> {/* Add Navbar here */}
-          <div className="add-project-container">
+          <div className="add-project-form">
               <h1>ADD PROJECT</h1>
               {message && <p className="message">{message}</p>}
               <form onSubmit={handleSubmit(submitHandler)}>

@@ -1,18 +1,20 @@
 /* Center the form container */
-.add-project-container {
+.add-project-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width: 100%;
     background-color: #ffffff; /* Dark background, like the navbar */
     padding: 20px;
 
 }
 
+
+
 /* Form Box */
-form {
+.add-project-form form {
     width: 400px;
     background: #000000; /* Darker background for the form */
     padding: 30px;
@@ -23,7 +25,7 @@ form {
 }
 
 /* Heading */
-h1 {
+.add-project-form h1 {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -32,14 +34,14 @@ h1 {
 }
 
 /* Form Groups */
-.form-group {
+.add-project-form .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
 /* Labels */
-label {
+.add-project-form label {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -47,8 +49,8 @@ label {
 }
 
 /* Inputs & Textarea */
-input,
-textarea {
+.add-project-form input,
+.add-project-form textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #495057; /* Darker border */
@@ -59,14 +61,14 @@ textarea {
 }
 
 /* Error Messages */
-.error-message {
+.add-project-form .error-message {
     color: #ff6b6b; /* A more vibrant error color */
     font-size: 14px;
     margin-top: 3px;
 }
 
 /* Submit Button */
-.submit-btn {
+.add-project-form .submit-btn {
     width: 100%;
     padding: 12px;
     background: #fff;
@@ -80,13 +82,13 @@ textarea {
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.submit-btn:hover {
+.add-project-form .submit-btn:hover {
     background: #212529;
     color: #fff;
 }
 
 /* Message Styling */
-.message {
+.add-project-form .message {
     text-align: center;
     font-size: 16px;
     margin-bottom: 15px;
