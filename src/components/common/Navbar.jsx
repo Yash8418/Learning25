@@ -15,8 +15,8 @@ const Navbar = () => {
           Dashboard
         </Link>
         <Link
-          to="/admin/addProject"
-          className={`nav-link ${location.pathname === "/admin/addProject" ? "active" : ""}`}
+          to="/admin/projects"
+          className={`nav-link ${location.pathname === "/admin/projects" ? "active" : ""}`}
         >
           Projects
         </Link>

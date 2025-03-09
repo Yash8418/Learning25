@@ -7,6 +7,8 @@ import { DeveloperDashboard } from "./components/Developer/DeveloperDashboard";
 import { ProjectManagerDashboard } from "./components/ProjectManager/ProjectManagerDashboard";
 import { AddProject } from "./components/Admin/AddProject";
 import axios from "axios";
+import ProjectPage from "./components/Admin/Project";
+
 // import "./css/navbar.css"; // Import navbar.css
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
               <Route path="/ProjectManager" element={<Navigate to="/ProjectManager/dashboard" />} />
               <Route path="/ProjectManager/dashboard" element={<ProjectManagerDashboard/>} />
               <Route path="/admin/addProject" element={<AddProject></AddProject>} />
+              <Route path="/admin/projects" element={<ProjectPage/>} />
+
             </Routes>
             </div>
         </Router>
