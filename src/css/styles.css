@@ -1,29 +1,42 @@
-/* Global Styles */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f8f8;
+/* Apply styles only to login and register pages */
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  padding: 20px; 
+  box-sizing: border-box;
+}
+
+/* Ensure other pages (like Dashboard) are NOT affected */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
 }
 
 /* Container */
 .container {
   display: flex;
-  width: 900px;
-  height: 500px;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px; /* Updated from 900px */
+  min-height: 500px;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Left Section (Form) */
 .form-container {
   flex: 1;
-  padding: 40px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,16 +100,16 @@ body {
   padding: 12px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  background-color: white; /* Changed from black to white */
-  color: black; /* Changed from white to black */
+  background-color: white;
+  color: black;
   font-size: 14px;
 }
 
 .input-group input::placeholder {
-  color: #666; /* Changed from #bbb to a darker gray */
+  color: #666;
 }
 
-/* Buttons */
+/* Button */
 .register-btn {
   width: 100%;
   padding: 12px;
@@ -141,4 +154,21 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #bbb;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 90%;
+    min-height: auto;
+  }
+
+  .info-container {
+    padding: 20px;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
 }

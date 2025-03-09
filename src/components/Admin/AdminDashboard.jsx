@@ -1,21 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../../css/dashboardcss.css'; // Import CSS
+import React from "react";
+import Navbar from "../common/Navbar"; // Import navbar component
+import "../../css/dashboardcss.css";
 
 export const AdminDashboard = () => {
   return (
-    <div className="dashboard-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
-          <Link to="/admin/addProject" className="nav-link">Projects</Link>
-        </div>
-      </nav>
+    <div className="admin-dashboard">
+      <Navbar /> {/* Navbar added here */}
 
-      {/* Dashboard Content */}
       <div className="dashboard-content">
-        <h3>Welcome to the Admin Dashboard</h3>
+        <div className="dashboard-header">
+          <h1>Welcome back, admin</h1>
+        </div>
+
+        <div className="cards-container">
+          <div className="card">
+            <h3>Total Projects</h3>
+            <p>0</p>
+          </div>
+          <div className="card">
+            <h3>Active Tasks</h3>
+            <p>0</p>
+          </div>
+          <div className="card">
+            <h3>Hours This Week</h3>
+            <p>35</p>
+          </div>
+        </div>
+
+        <div className="weekly-hours-container">
+          <h3>Weekly Hours</h3>
+          <div className="weekly-chart">[Graph Placeholder]</div>
+        </div>
+
+        <div className="success-message">
+          <strong>Login successful</strong>
+          <p>Welcome back, admin!</p>
+        </div>
       </div>
     </div>
   );

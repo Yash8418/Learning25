@@ -1,68 +1,94 @@
+/* Center the form container */
 .add-project-container {
-    width: 100%;
-    max-width: 900px;
-    /* margin: 50px auto; */
-    background: white;
-    padding: 10px; /* Reduced padding */
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Center everything */
-body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-    margin: 0;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff; /* Dark background, like the navbar */
+    padding: 20px;
+
 }
 
-/* Typography - Smaller font */
+/* Form Box */
+form {
+    width: 400px;
+    background: #000000; /* Darker background for the form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+    text-align: left;
+    color: #fff; /* White text for better readability on dark background */
+}
+
+/* Heading */
 h1 {
-    text-align: center;
-    font-size: 15px; /* Reduced from 24px */
+    font-size: 24px;
     font-weight: bold;
-    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #212529; /* White text */
+}
+
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
-/* Form Layout */
-.form-group {
-    margin-bottom: 11px;
-}
-
+/* Labels */
 label {
-    display: block;
+    font-size: 16px;
     font-weight: 500;
-    font-size: 12px; /* Reduced from 14px */
-    margin-bottom: 3px;
-    color: #444;
+    margin-bottom: 5px;
+    color: #adb5bd; /* Light grey color for labels */
 }
 
-input, textarea {
-    width: 98%;
-    padding: 8px; /* Slightly reduced padding */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px; /* Reduced from 14px */
-    background: white;
-    color: black;
+/* Inputs & Textarea */
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #495057; /* Darker border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #343a40; /* Dark background for inputs */
+    color: #fff; /* White text color */
+}
+
+/* Error Messages */
+.error-message {
+    color: #ff6b6b; /* A more vibrant error color */
+    font-size: 14px;
+    margin-top: 3px;
 }
 
 /* Submit Button */
 .submit-btn {
     width: 100%;
-    padding: 10px; /* Slightly reduced */
+    padding: 12px;
+    background: #fff;
+    color: #212529;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
-    border-radius: 4px;
-    background: #007bff;
-    color: white;
-    font-size: 14px; /* Reduced from 16px */
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    margin-top: 10px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 .submit-btn:hover {
-    background: #0056b3;
+    background: #212529;
+    color: #fff;
+}
+
+/* Message Styling */
+.message {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #a7ff83; /* A more suitable color for success messages on dark background */
 }

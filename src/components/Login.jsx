@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../css/styles.css";
 const clipboardIcon = "/clipboard.jpg"; // Image from public folder
 
 const Login = () => {
@@ -14,8 +15,6 @@ const Login = () => {
       
       const res = await axios.post("/login", data);
       console.log("API Response:", res.data);
-      // console.log(res.data.user._id); //axios
-
 
       if (res.status === 200) {
         if (res.data.Message === "User FOUND successfully") {
@@ -36,43 +35,45 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      {/* Left Section - Login Form */}
-      <div className="form-container">
-        <h2 className="title">Time Tracker</h2>
-        <p className="subtitle">Manage your projects and track time efficiently</p>
+    <div className="auth-container"> 
+      <div className="container">
+        {/* Left Section - Login Form */}
+        <div className="form-container">
+          <h2 className="title">Time Tracker</h2>
+          <p className="subtitle">Manage your projects and track time efficiently</p>
 
-        {/* Tabs */}
-        <div className="tabs">
-          <button className="tab active">Login</button>
-          <button className="tab" onClick={() => navigate("/register")}>
-            Register
-          </button>
+          {/* Tabs */}
+          <div className="tabs">
+            <button className="tab active">Login</button>
+            <button className="tab" onClick={() => navigate("/register")}>
+              Register
+            </button>
+          </div>
+
+          {/* Form Fields */}
+          <form onSubmit={handleSubmit(submitHandler)}>
+            <div className="input-group">
+              <label>User Name</label>
+              <input type="text" {...register("username")} required />
+            </div>
+            <div className="input-group">
+              <label>Password</label>
+              <input type="password" {...register("password")} required />
+            </div>
+            <button className="register-btn" type="submit">
+              Login
+            </button>
+          </form>
         </div>
 
-        {/* Form Fields */}
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <div className="input-group">
-            <label>User Name</label>
-            <input type="text" {...register("username")} required />
-          </div>
-          <div className="input-group">
-            <label>Password</label>
-            <input type="password" {...register("password")} required />
-          </div>
-          <button className="register-btn" type="submit">
-            Login
-          </button>
-        </form>
-      </div>
-
-      {/* Right Section - Info */}
-      <div className="info-container">
-        <img src={clipboardIcon} alt="Clipboard Icon" />
-        <h2 className="info-title">Track Time, Boost Productivity</h2>
-        <p className="info-text">
-          Efficiently manage projects, track time, and improve team productivity with our intuitive time tracking solution.
-        </p>
+        {/* Right Section - Info */}
+        <div className="info-container">
+          <img src={clipboardIcon} alt="Clipboard Icon" />
+          <h2 className="info-title">Track Time, Boost Productivity</h2>
+          <p className="info-text">
+            Efficiently manage projects, track time, and improve team productivity with our intuitive time tracking solution.
+          </p>
+        </div>
       </div>
     </div>
   );

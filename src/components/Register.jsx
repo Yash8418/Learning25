@@ -1,44 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-const clipboardIcon = "/clipboard.jpg"; // Image from public folder
 import axios from "axios";
+import "../css/styles.css";
+
+const clipboardIcon = "/clipboard.jpg"; // Image from public folder
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Developer");
-
-  const handleRegister = () => {
-    alert(`Registering ${username} as a ${role}`);
-  };
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const submitHandler = async (data) => {
-    console.log("formData...", data);
+    console.log("Form Data Submitted:", data);
 
     try {
-        const res = await axios.post("/register", data, {
-            headers: { "Content-Type": "application/json" }
-        });
+      const res = await axios.post("/register", data, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-        console.log(res.data);
-        if (res.status === 200) {
-            alert("Signup success");
-            navigate("/login");
-        } else {
-            alert("Signup failed");
-        }
+      console.log("API Response:", res.data);
+
+      if (res.status === 200) {
+        alert("Signup successful!");
+        navigate("/login");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
     } catch (error) {
-        console.error("Error registering:", error.response?.data || error.message);
-        alert("Signup failed. Check console for details.");
+      console.error("Signup Error:", error.response?.data || error.message);
+      alert("Signup failed. Check console for details.");
     }
-};
-
-  
-
+  };
 
   return (
     <div className="container">
@@ -49,44 +41,45 @@ const Register = () => {
 
         {/* Tabs */}
         <div className="tabs">
-          <button className="tab" onClick={() => navigate("/login")}>Login</button>
+          <button className="tab" onClick={() => navigate("/login")}>
+            Login
+          </button>
           <button className="tab active">Register</button>
         </div>
 
         {/* Form Fields */}
-      <form onSubmit={handleSubmit(submitHandler)}>
-        <div className="input-group">
-          <label>firstName</label>
-          <input type="text" {...register("username")} />
-        </div>
-        <div className="input-group">
-          <label>Password</label>
-          <input type="password" {...register("password")} />
-        </div>
-        <div className="input-group">
-        <label>Role</label>
-        <select {...register("role")}>
-          <option>Developer</option>
-          <option>Manager</option>
-          <option>Admin</option>
-        </select>
-        </div>
-        <div>
-          <input className="register-btn" type="submit" value="Signup" />
-        </div>
-      </form>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <div className="input-group">
+            <label>First Name</label>
+            <input type="text" {...register("username")} required />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input type="password" {...register("password")} required />
+          </div>
+          <div className="input-group">
+            <label>Role</label>
+            <select {...register("role")} required>
+              <option value="Developer">Developer</option>
+              <option value="Manager">Manager</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </div>
+          <button className="register-btn" type="submit">
+            Signup
+          </button>
+        </form>
+      </div>
 
       {/* Right Section - Info */}
-     
-    </div>
-    <div className="info-container">
+      <div className="info-container">
         <img src={clipboardIcon} alt="Clipboard Icon" />
         <h2 className="info-title">Track Time, Boost Productivity</h2>
         <p className="info-text">
           Efficiently manage projects, track time, and improve team productivity with our intuitive time tracking solution.
         </p>
       </div>
-  </div>
+    </div>
   );
 };
 
