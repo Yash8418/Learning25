@@ -4,33 +4,34 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     width: 100%;
-    background-color: #ffffff; /* Dark background, like the navbar */
+    background-color: #ffffff; /* Light background */
     padding: 20px;
-
+    box-sizing: border-box;
+   
 }
-
-
 
 /* Form Box */
 .add-project-form form {
-    width: 400px;
-    background: #000000; /* Darker background for the form */
+    width: 100%;
+    max-width: 480px;
+    background: rgba(20, 24, 32, 0.95);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7);
     text-align: left;
-    color: #fff; /* White text for better readability on dark background */
+    color: #f8f9fa;
+    margin: 0 auto;
 }
 
 /* Heading */
 .add-project-form h1 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    color: #212529; /* White text */
+    color: #212529; /* Black text for contrast */
 }
 
 /* Form Groups */
@@ -51,13 +52,20 @@
 /* Inputs & Textarea */
 .add-project-form input,
 .add-project-form textarea {
-    width: 100%;
-    padding: 10px;
+    width: 95%;
+    padding: 12px;
     border: 1px solid #495057; /* Darker border */
     border-radius: 5px;
     font-size: 16px;
     background-color: #343a40; /* Dark background for inputs */
     color: #fff; /* White text color */
+    transition: border 0.3s ease-in-out;
+}
+
+.add-project-form input:focus,
+.add-project-form textarea:focus {
+    border: 1px solid #4caf50; /* Green border focus effect */
+    outline: none;
 }
 
 /* Error Messages */
@@ -79,11 +87,11 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: all 0.3s ease-in-out;
 }
 
 .add-project-form .submit-btn:hover {
-    background: #212529;
+    background: #4caf50; /* Green background on hover */
     color: #fff;
 }
 
@@ -92,5 +100,21 @@
     text-align: center;
     font-size: 16px;
     margin-bottom: 15px;
-    color: #a7ff83; /* A more suitable color for success messages on dark background */
+    color: #a7ff83; /* A more suitable color for success messages */
+}
+
+/* Ensure no horizontal scrolling */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Fix right-side cutoff issue */
+@media (max-width: 600px) {
+    .add-project-form form {
+        width: 90%;
+        padding: 20px;
+    }
 }
