@@ -7,7 +7,6 @@ import { DeveloperDashboard } from "./components/Developer/DeveloperDashboard";
 import { ProjectManagerDashboard } from "./components/ProjectManager/ProjectManagerDashboard";
 import { AddProject } from "./components/Admin/AddProject";
 import axios from "axios";
-import "./css/styles.css";
 import ProjectPage from "./components/Admin/Project";
 
 // import "./css/navbar.css"; // Import navbar.css
