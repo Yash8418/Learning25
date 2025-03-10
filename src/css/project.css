@@ -1,84 +1,109 @@
 .project-page-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.project-header h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.project-header p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.project-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.new-project-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.project-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* 🎨 Animated Project Cards */
+.project-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  position: relative;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* 🖱️ Hover Effect - Lift the Card */
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🖲️ Click Effect - Quick Scale Down */
+.project-card:active {
+  transform: scale(0.98);
+}
+
+/* 🔥 Fade-in Up Animation */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
   }
-  
-  .project-header h1 {
-    font-size: 28px;
-    font-weight: bold;
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  .project-header p {
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  .project-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .search-box {
-    padding: 10px;
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .new-project-btn {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .project-list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .project-card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    min-width: 300px;
-    max-width: 350px;
-    position: relative;
-  }
-  
-  .project-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .project-info {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
-  }
-  
-  .project-footer {
-    font-size: 12px;
-    color: #888;
-    margin-top: 15px;
-  }
-  
-  .status {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-  }
-  
+}
+
+.project-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.project-info {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.project-footer {
+  font-size: 12px;
+  color: #888;
+  margin-top: 15px;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}

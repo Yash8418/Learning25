@@ -1,0 +1,34 @@
+.reports-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Ensures charts are arranged in rows of 3 */
+  .chart-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always 3 per row */
+    gap: 20px; /* Space between charts */
+    justify-content: center;
+    align-items: start;
+    margin-top: 20px;
+  }
+  
+  /* Styling for each chart container */
+  .chart-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    min-width: 300px; /* Minimum width to maintain spacing */
+  }
+  
+  /* Ensures all charts have a uniform height */
+  .chart-wrapper {
+    width: 100%;
+    height: 280px; /* Adjust height to make them smaller */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

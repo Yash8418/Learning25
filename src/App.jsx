@@ -8,6 +8,8 @@ import { ProjectManagerDashboard } from "./components/ProjectManager/ProjectMana
 import { AddProject } from "./components/Admin/AddProject";
 import axios from "axios";
 import ProjectPage from "./components/Admin/Project";
+import Tasks from "./components/Admin/Task";
+import Reports from "./components/Admin/Reports";
 
 // import "./css/navbar.css"; // Import navbar.css
 
@@ -29,7 +31,8 @@ function App() {
               <Route path="/ProjectManager/dashboard" element={<ProjectManagerDashboard/>} />
               <Route path="/admin/addProject" element={<AddProject></AddProject>} />
               <Route path="/admin/projects" element={<ProjectPage/>} />
-
+              <Route path="/admin/tasks" element={<Tasks />} />
+              <Route path="/admin/reports" element={<Reports />} />
             </Routes>
             </div>
         </Router>
