@@ -17,11 +17,16 @@ const Login = () => {
       console.log("API Response:", res.data);
 
       if (res.status === 200) {
+        localStorage.setItem("id",res.data.role._id);
+        localStorage.setItem("role",res.data.role.role);
         if (res.data.Message === "User FOUND successfully") {
-          if (res.data.role === "Developer") {
+          if (res.data.role.role === "Developer") {
             navigate("/developer");
-          } else if (res.data.role === "Admin" || res.data.role === "Manager") {
+          } else if (res.data.role.role === "Admin") {
             navigate("/admin");
+          }
+          else if(res.data.role.role === "Manager"){
+            navigate("projectManager");
           }
           alert("Login successful!");
         } else {
@@ -75,7 +80,7 @@ const Login = () => {
           </p>
         </div>
       </div>
-    </div>
+     </div>
   );
 };
 

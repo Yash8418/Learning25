@@ -9,6 +9,8 @@ body {
   min-height: 100vh; /* Ensure full viewport height */
   display: flex;
   flex-direction: column; /* Stack navbar and content */
+  /* align-items: center;
+  justify-content: center; */
 }
 
 
@@ -25,7 +27,7 @@ body {
     overflow: hidden;
     box-sizing: border-box;
     padding: 20px;
-}
+    }
 
 /* Left Section (Form) */
 .form-container {
