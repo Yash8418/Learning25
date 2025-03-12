@@ -3,30 +3,32 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/styles.css";
+
 const clipboardIcon = "/clipboard.jpg"; // Image from public folder
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  
+
   const submitHandler = async (data) => {
     try {
       console.log("Form Data Submitted:", data);
-      
+
       const res = await axios.post("/login", data);
       console.log("API Response:", res.data);
 
       if (res.status === 200) {
-        localStorage.setItem("id",res.data.role._id);
-        localStorage.setItem("role",res.data.role.role);
+        localStorage.setItem("id", res.data.role._id);
+        localStorage.setItem("role", res.data.role.role);
+        localStorage.setItem("username", data.username); // Store username
+
         if (res.data.Message === "User FOUND successfully") {
           if (res.data.role.role === "Developer") {
             navigate("/developer");
           } else if (res.data.role.role === "Admin") {
             navigate("/admin");
-          }
-          else if(res.data.role.role === "Manager"){
-            navigate("projectManager");
+          } else if (res.data.role.role === "Manager") {
+            navigate("/projectManager");
           }
           alert("Login successful!");
         } else {
@@ -40,14 +42,12 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container"> 
+    <div className="auth-container">
       <div className="container">
-        {/* Left Section - Login Form */}
         <div className="form-container">
           <h2 className="title">Time Tracker</h2>
           <p className="subtitle">Manage your projects and track time efficiently</p>
 
-          {/* Tabs */}
           <div className="tabs">
             <button className="tab active">Login</button>
             <button className="tab" onClick={() => navigate("/register")}>
@@ -55,7 +55,6 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Form Fields */}
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="input-group">
               <label>User Name</label>
@@ -71,7 +70,6 @@ const Login = () => {
           </form>
         </div>
 
-        {/* Right Section - Info */}
         <div className="info-container">
           <img src={clipboardIcon} alt="Clipboard Icon" />
           <h2 className="info-title">Track Time, Boost Productivity</h2>
@@ -80,7 +78,7 @@ const Login = () => {
           </p>
         </div>
       </div>
-     </div>
+    </div>
   );
 };
 

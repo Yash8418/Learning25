@@ -58,6 +58,10 @@ const Register = () => {
             <input type="password" {...register("password")} required />
           </div>
           <div className="input-group">
+            <label>Email</label>
+            <input type="email" {...register("email")} required />
+          </div>
+          <div className="input-group">
             <label>Role</label>
             <select {...register("role")} required>
               <option value="Developer">Developer</option>

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "../../css/navbar.css" // Keep the same CSS
+import "../../css/navbar.css"; // Keep the same CSS
 
 const Navbar = () => {
   const location = useLocation();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   return (
     <nav className="navbar">
@@ -32,6 +40,9 @@ const Navbar = () => {
         >
           Reports
         </Link>
+      </div>
+      <div className="navbar-right">
+        {username ? <span className="user-name">Welcome, {username}</span> : null}
       </div>
     </nav>
   );
