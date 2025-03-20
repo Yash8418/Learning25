@@ -8,10 +8,11 @@
     width: 100%;
     background-color: #ffffff; /* Light background */
     padding: 20px;
-    box-sizing: border-box;
     
-   
+    box-sizing: border-box;
+ 
 }
+
 
 /* Form Box */
 .add-project-form form {
@@ -32,7 +33,7 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    color: #212529; /* Black text for contrast */
+     /* color: #212529; Black text for contrast */
 }
 
 /* Form Groups */
@@ -51,7 +52,16 @@
 }
 
 /* Inputs & Textarea */
-.add-project-form input,
+.add-project-form input{
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #495057; /* Darker border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #343a40; /* Dark background for inputs */
+    color: #fff; /* White text color */
+    transition: border 0.3s ease-in-out;
+}
 .add-project-form textarea {
     width: 95%;
     padding: 12px;
@@ -61,6 +71,7 @@
     background-color: #343a40; /* Dark background for inputs */
     color: #fff; /* White text color */
     transition: border 0.3s ease-in-out;
+    resize: none;
 }
 
 .add-project-form input:focus,
@@ -119,3 +130,4 @@ body {
         padding: 20px;
     }
 }
+

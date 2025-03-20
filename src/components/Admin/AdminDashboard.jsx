@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../common/Navbar"; // Import navbar component
+import Navbar from "../Admin/AdminNavbar"; // Import navbar component
 import "../../css/dashboardcss.css";
 
 export const AdminDashboard = () => {

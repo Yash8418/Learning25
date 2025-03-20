@@ -1,4 +1,4 @@
-/* Navbar Styles */
+/* Navbar Styles
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -32,4 +32,58 @@
 .nav-link:hover {
   background: #444;
   border-radius: 5px;
+} */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background: #222;
+  align-items: center;
+  /* width: 100%; */
+  color: white;
+  padding: 15px 20px;
+  /* box-sizing: border-box; */
+
+}
+
+.nav-left .nav-link {
+  margin-right: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-right {
+  position: relative;
+}
+
+.user-menu {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #333;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Dropdown Card */
+.dropdown-card {
+  position: absolute;
+  top: 40px; /* Appears below username */
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  width: 180px;
+  z-index: 100;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-item:hover {
+  background: lightgray;
 }
