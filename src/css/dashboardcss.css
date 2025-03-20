@@ -11,7 +11,7 @@ html, body {
   width: 100vw; /* Use viewport width */
   min-height: 100vh; /* Use viewport height */
   margin: 0;
-  padding: 0;
+  padding:0;
   background-color: #ffffff; /* Optional: Background color */
   box-sizing: border-box; /* Ensures padding is within the width */
   font-family: 'Poppins', sans-serif; /* Add font-family here */
@@ -24,6 +24,7 @@ html, body {
   text-align: center;
   margin: 20px 0;
 }
+ 
 
 /* Cards Section */
 .cards-container {
@@ -33,6 +34,7 @@ html, body {
   gap: 20px;
   width: 100%; /* Take full width */
   box-sizing: border-box; /* Ensure padding doesn't break layout */
+  padding: 0 20px; /* Add padding to the sides */
 }
 
 .card {

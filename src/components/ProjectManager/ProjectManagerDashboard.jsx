@@ -65,7 +65,10 @@ const ProjectManagerDashboard = () => {
     <div>
       <Navbar role="Project Manager" />
       <div className="dashboard-content">
-        <h1>Welcome back, Project Manager</h1>
+      <div className="dashboard-header">
+          <h1>Welcome back, Project Manager</h1>
+        </div>
+        {/* <h1>Welcome back, Project Manager</h1> */}
         <div className="cards-container">
           <div className="card">
             <h3>Total Projects</h3>
@@ -87,10 +90,10 @@ const ProjectManagerDashboard = () => {
             <h3>Overdue Tasks</h3>
             <p>{metrics.overdueTasks}</p>
           </div>
-          <div className="card">
+          {/* <div className="card">
             <h3>Developer Efficiency</h3>
             <p>{metrics.developerEfficiency}</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Add charts or tables */}

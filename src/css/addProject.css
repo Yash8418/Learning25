@@ -58,8 +58,8 @@
     border: 1px solid #495057; /* Darker border */
     border-radius: 5px;
     font-size: 16px;
-    background-color: #343a40; /* Dark background for inputs */
-    color: #fff; /* White text color */
+    background-color: #fff; /* Dark background for inputs */
+    /* color: #fff; White text color */
     transition: border 0.3s ease-in-out;
 }
 .add-project-form textarea {
@@ -68,8 +68,8 @@
     border: 1px solid #495057; /* Darker border */
     border-radius: 5px;
     font-size: 16px;
-    background-color: #343a40; /* Dark background for inputs */
-    color: #fff; /* White text color */
+    background-color: #fff; /* Dark background for inputs */
+    color: #495057; /* White text color */
     transition: border 0.3s ease-in-out;
     resize: none;
 }
@@ -122,6 +122,8 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
 }
+
+
 
 /* Fix right-side cutoff issue */
 @media (max-width: 600px) {

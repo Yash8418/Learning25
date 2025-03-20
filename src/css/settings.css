@@ -25,11 +25,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
+.settings-form .form-group {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.settings-form .form-group label {
     display: block;
     font-size: 16px;
     margin-bottom: 5px;

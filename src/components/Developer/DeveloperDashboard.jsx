@@ -48,7 +48,10 @@ const DeveloperDashboard = () => {
     <div>
       <Navbar role="Developer" />
       <div className="dashboard-content">
-        <h1>Welcome back, Developer</h1>
+      <div className="dashboard-header">
+          <h1>Welcome back, Developer</h1>
+      </div>
+        {/* <h1>Welcome back, Developer</h1> */}
         <div className="cards-container">
           <div className="card">
             <h3>Total Assigned Tasks</h3>
