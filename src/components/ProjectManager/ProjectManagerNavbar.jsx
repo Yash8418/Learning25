@@ -103,6 +103,13 @@ const ProjectManagerNavbar = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    localStorage.removeItem("id");
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -148,6 +155,7 @@ const ProjectManagerNavbar = () => {
           <div ref={menuRef} className="dropdown-card">
             <div className="dropdown-item" onClick={() => navigate("/ProjectManager/notifications")}>🔔 Notifications</div>
             <div className="dropdown-item" onClick={() => navigate("/ProjectManager/settings")}>⚙️ Settings</div>
+            <div className="dropdown-item " onClick={handleLogout}>🚪 Sign Out </div>
           </div>
         )}
       </div>

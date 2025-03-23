@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../../css/navbar.css";
 
 const AdminNavbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -12,6 +15,30 @@ const AdminNavbar = () => {
       setUsername(storedUsername);
     }
   }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    localStorage.removeItem("id");
+    navigate("/login");
+  };
+
+   // Close menu when clicking outside
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          setMenuOpen(false);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
 
   return (
     <nav className="navbar">
@@ -41,8 +68,28 @@ const AdminNavbar = () => {
           Reports
         </Link>
       </div>
+
+      
       <div className="navbar-right">
-        {username ? <span className="user-name">Welcome, {username}</span> : null}
+        {username ? (
+          <div className="user-menu" onClick={toggleMenu}>
+            Welcome, {username} ▼
+          </div>
+        ) : null}
+
+        {menuOpen && (
+          <div ref={menuRef} className="dropdown-card">
+            <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
+              🔔 Notifications
+            </div>
+            <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
+              ⚙️ Settings
+            </div>
+            <div className="dropdown-item " onClick={handleLogout}>
+              🚪 Sign Out
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

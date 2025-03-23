@@ -20,6 +20,13 @@ const DeveloperNavbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    localStorage.removeItem("id");
+    navigate("/login");
+  };
+
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -48,9 +55,6 @@ const DeveloperNavbar = () => {
         <Link to="/developer/reports" className={`nav-link ${location.pathname === "/developer/reports" ? "active" : ""}`}>
           Reports
         </Link>
-        {/* <Link to="/developer/time-tracking" className={`nav-link ${location.pathname === "/developer/time-tracking" ? "active" : ""}`}>
-          Time Tracking
-        </Link> */}
       </div>
 
       <div className="navbar-right">
@@ -67,6 +71,9 @@ const DeveloperNavbar = () => {
             </div>
             <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
               ⚙️ Settings
+            </div>
+            <div className="dropdown-item " onClick={handleLogout}>
+              🚪 Sign Out
             </div>
           </div>
         )}

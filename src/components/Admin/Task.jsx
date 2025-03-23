@@ -1,37 +1,56 @@
-import React, { useState } from "react";
-import Navbar from "../common/Navbar"; // Adjust path if needed
-import "../../css/task.css"; // Ensure this CSS file exists
+import React, { useState, useEffect } from "react";
+import Navbar from "../Admin/AdminNavbar";
+import "../../css/task.css";
+// import TaskManager from "./TaskManager";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "User Authentication",
-      description: "Implement user authentication system",
-      estimatedHours: 8,
-      status: "completed",
-    },
-    {
-      id: 2,
-      title: "Shopping Cart",
-      description: "Build shopping cart functionality",
-      estimatedHours: 16,
-      status: "in_progress",
-    },
-    {
-      id: 3,
-      title: "UI Design",
-      description: "Create mobile app UI design",
-      estimatedHours: 24,
-      status: "not_started",
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState("");
+
+  // Fetch tasks
+  useEffect(() => {
+    fetch("http://localhost:8000/getTask") // API endpoint
+      .then((response) => response.json())
+      .then((data) => setTasks(data))
+      .catch((error) => console.error("Error fetching tasks:", error));
+  }, []);
+
+  // Fetch projects
+  useEffect(() => {
+    fetch("http://localhost:8000/getAllProjects")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Full API Response:", data); // Debugging
+        setProjects(data); // Directly setting data since it's an array
+      })
+      .catch((error) => console.error("Error fetching projects:", error));
+  }, []);
+  
+  
 
   return (
     <div>
       <Navbar />
       <div className="tasks-container">
         <h1>Tasks</h1>
+
+        {/* Project Dropdown */}
+        <label>Select Project:</label>
+        <select
+          value={selectedProject}
+          onChange={(e) => setSelectedProject(e.target.value)}
+        >
+          <option value="">-- Select a Project --</option>
+          {projects.map((project) => (
+  <option key={project.id} value={project.id}>
+    {project.title}  {/* Change 'name' to 'title' */}
+  </option>
+))}
+
+        </select>
+{/* 
+        <TaskManager />
         <div className="tasks-list">
           {tasks.map((task) => (
             <div key={task.id} className="task-card">
@@ -39,29 +58,19 @@ const Tasks = () => {
                 <h2>{task.title}</h2>
                 <p>{task.description}</p>
                 <p className="estimated-time">
-                  ⏳ {task.estimatedHours} hours estimated
+                  ⏳ {task.totalMinutes} minutes estimated
                 </p>
               </div>
               <div className="task-actions">
-                {task.status === "completed" && (
-                  <span className="status completed">✔ Completed</span>
-                )}
-                {task.status === "in_progress" && (
-                  <>
-                    <span className="status in-progress">⏳ In Progress</span>
-                    <button className="stop-timer">⏹ Stop Timer</button>
-                  </>
-                )}
-                {task.status === "not_started" && (
-                  <>
-                    <span className="status not-started">⚪ Not Started</span>
-                    <button className="start-timer">▶ Start Timer</button>
-                  </>
+                {task.status_id && (
+                  <span className={`status ${task.status_id.name}`}>
+                    {task.status_id.name}
+                  </span>
                 )}
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
