@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../Admin/AdminNavbar";
-import "../../css/task.css";
-// import TaskManager from "./TaskManager";
+import Navbar from "../common/Navbar";
+import "../../css/tasks.css";
+import TaskManager from "./TaskManager"; 
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,7 +27,6 @@ const Tasks = () => {
       .catch((error) => console.error("Error fetching projects:", error));
   }, []);
   
-  
 
   return (
     <div>
@@ -41,15 +40,13 @@ const Tasks = () => {
           value={selectedProject}
           onChange={(e) => setSelectedProject(e.target.value)}
         >
-          <option value="">-- Select a Project --</option>
           {projects.map((project) => (
-  <option key={project.id} value={project.id}>
-    {project.title}  {/* Change 'name' to 'title' */}
-  </option>
-))}
-
+    <option key={project.id} value={project.id}>
+      {project.title}  {/* Change 'name' to 'title' */}
+    </option>
+  ))}
         </select>
-{/* 
+
         <TaskManager />
         <div className="tasks-list">
           {tasks.map((task) => (
@@ -70,7 +67,7 @@ const Tasks = () => {
               </div>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );

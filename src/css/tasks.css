@@ -1,0 +1,121 @@
+/* Task Manager Container */
+.task-manager {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Task List */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Task Card */
+  .task-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 12px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .task-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Task Title */
+  .task-card h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+  
+  /* Task Description */
+  .task-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Start Timer Button */
+  .start-timer {
+    background: #28a745;
+    color: white;
+    margin-right: 8px;
+  }
+  
+  .start-timer:hover {
+    background: #218838;
+    transform: scale(1.05);
+  }
+  
+  /* Stop Timer Button */
+  .stop-timer {
+    background: #dc3545;
+    color: white;
+  }
+  
+  .stop-timer:hover {
+    background: #c82333;
+    transform: scale(1.05);
+  }
+  
+  /* Dropdowns & Input Fields */
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    border-color: #007bff;
+  }
+  
+  /* Add Task Button */
+  button.add-task {
+    background: #007bff;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  button.add-task:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
