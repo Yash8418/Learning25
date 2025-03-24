@@ -29,6 +29,7 @@ import ProjectManagerSettings from "./components/ProjectManager/Settings";
 import axios from "axios";
 import { AddProject_PM } from "./components/ProjectManager/AddProject_PM";
 import Module from "./components/Admin/Module";
+import AddModule from "./components/Admin/AddModule";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
@@ -48,7 +49,8 @@ function App() {
           <Route path="/admin/projects" element={<ProjectPage />} />
           <Route path="/admin/tasks" element={<Tasks />} />
           <Route path="/admin/reports" element={<Reports />} />
-          <Route path="/admin/modules" element={<Module />} />
+          <Route path="/admin/module" element={<Module/>} />
+          <Route path="/admin/addModule" element={<AddModule />} />
 
         </Route>
 

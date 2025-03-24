@@ -1,0 +1,30 @@
+.module-page-container {
+    padding: 20px;
+  }
+  
+  .module-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+  }
+  
+  .module-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .new-module-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .new-module-btn:hover {
+    background-color: #0056b3;
+  }

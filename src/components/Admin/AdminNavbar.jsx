@@ -68,7 +68,7 @@ const AdminNavbar = () => {
           Reports
         </Link>
         <Link
-          to="/admin/modules"
+          to="/admin/module"
           className={`nav-link ${location.pathname === "/admin/modules" ? "active" : ""}`}
         >
           modules
