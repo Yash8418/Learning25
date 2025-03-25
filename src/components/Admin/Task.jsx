@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../common/Navbar";
+import Navbar from "./AdminNavbar";
 import "../../css/tasks.css";
 import TaskManager from "./TaskManager"; 
 

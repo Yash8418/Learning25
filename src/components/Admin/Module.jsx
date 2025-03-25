@@ -88,14 +88,16 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
-const ModuleCard = ({ name, description, projectName, estimatedHours, startDate }) => {
+const ModuleCard = ({ moduleName, description, project_id, estimatedHours, startDate }) => {
+  const projectName = project_id ? project_id.title : "Unknown Project";  // Fetch project name from project_id.title
+
   return (
     <div className="module-card">
-      <h3>{name}</h3>
+      <h3>{moduleName}</h3>  {/* Show module name */}
       <p>{description}</p>
       <div className="module-info">
-        <span>Project: {projectName}</span>
-        <span>Estimated Hours: {estimatedHours}</span>
+        <span>Project: {projectName}</span> <br />
+        <span>Estimated Hours: {estimatedHours}</span> <br />
         <span>Start Date: {new Date(startDate).toLocaleDateString()}</span>
       </div>
     </div>
