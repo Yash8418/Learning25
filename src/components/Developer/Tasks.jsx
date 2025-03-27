@@ -1,7 +1,7 @@
 // src/components/Developer/Tasks.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "../Developer/DeveloperNavbar";
-import "../../css/task.css";
+import "../../css/tasks.css";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);

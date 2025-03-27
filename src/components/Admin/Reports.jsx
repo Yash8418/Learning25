@@ -3,7 +3,7 @@ import React from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import "../../css/Reports.css";
-import Navbar from "../common/Navbar";
+import Navbar from "./AdminNavbar";
 
 const Reports = () => {
   const chartOptions = {

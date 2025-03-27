@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../css/project.css";
-import Navbar from "../common/Navbar";
+import Navbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
 const ProjectCard = ({ title, description, estimatedHours, technology, completionDate }) => {

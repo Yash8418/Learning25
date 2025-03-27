@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 import { AddProject } from "./components/Admin/AddProject";
 import ProjectPage from "./components/Admin/Project";
-import Tasks from "./components/Admin/Task";
+// import Tasks from "./components/Admin/Task";
 import Reports from "./components/Admin/Reports";
 
 import DeveloperDashboard from "./components/Developer/DeveloperDashboard";
@@ -30,6 +30,8 @@ import axios from "axios";
 import { AddProject_PM } from "./components/ProjectManager/AddProject_PM";
 import Module from "./components/Admin/Module";
 import AddModule from "./components/Admin/AddModule";
+import TaskPage from "./components/Admin/TaskPage";
+import AddTask from "./components/Admin/AddTask";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
@@ -47,7 +49,9 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/addProject" element={<AddProject />} />
           <Route path="/admin/projects" element={<ProjectPage />} />
-          <Route path="/admin/tasks" element={<Tasks />} />
+          <Route path="/admin/taskpage" element={<TaskPage />} />
+          <Route path="/admin/addTask" element={<AddTask />} />
+
           <Route path="/admin/reports" element={<Reports />} />
           <Route path="/admin/module" element={<Module/>} />
           <Route path="/admin/addModule" element={<AddModule />} />

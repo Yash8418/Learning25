@@ -56,8 +56,8 @@ const AdminNavbar = () => {
           Projects
         </Link>
         <Link
-          to="/admin/tasks"
-          className={`nav-link ${location.pathname === "/admin/tasks" ? "active" : ""}`}
+          to="/admin/taskpage"
+          className={`nav-link ${location.pathname === "/admin/taskpage" ? "active" : ""}`}
         >
           Tasks
         </Link>
