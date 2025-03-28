@@ -26,9 +26,10 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:8000/getProjectsForDeveloper");
+        const response = await fetch("http://localhost:8000/getAllProjects/");
+        localStorage.getItem("id");
         if (!response.ok) throw new Error("Failed to fetch projects");
-        
+        console.log("developer: ", response);
         const data = await response.json();
         setProjects(Array.isArray(data) ? data : []);
       } catch (err) {

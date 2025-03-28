@@ -25,6 +25,7 @@ const Login = () => {
         localStorage.setItem("id", res.data.role._id);
         localStorage.setItem("role", res.data.role.role);
         localStorage.setItem("username", res.data.role.username); // Store username
+        
   
         toast.success("🎉 Login successful!", {
           position: "top-center",

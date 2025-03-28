@@ -20,31 +20,51 @@ export const AddProject_PM = () => {
         try {
             const response = await axios.get("http://localhost:8000/getAllUser");
             const devs = response.data.filter(user => user.role === "Developer");
+            console.log(devs)
+            // console.log(_id)
             setDevelopers(devs);
         } catch (error) {
             console.error("Error fetching developers:", error);
         }
     };
 
+    // const handleDeveloperSelect = (event) => {
+    //     const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
+    //     setSelectedDevelopers(selectedOptions);
+    // };
     const handleDeveloperSelect = (event) => {
-        const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
-        setSelectedDevelopers(selectedOptions);
+        const selectedDeveloperId = event.target.value; // Get only one value
+        setSelectedDevelopers(selectedDeveloperId); // Store it as a string, not an array
     };
+    
 
     const submitHandler = async (data) => {
         if (new Date(data.completionDate) <= new Date(data.startDate)) {
             toast.error("❌ Completion date must be after the start date!", { position: "top-center" });
             return;
         }
+        const userId = localStorage.getItem("id"); // Make sure "id" matches what you stored
+            if (!userId) {
+                toast.error("❌ User ID not found. Please log in again.");
+                return;
+            }
+
         try {
+
+             // Retrieve user ID from localStorage
+                
+            data.userId = userId;   
             data.estimatedHours = parseInt(data.estimatedHours);
             data.startDate = new Date(data.startDate).toISOString();
             data.completionDate = new Date(data.completionDate).toISOString();
-            // data.assignedDevelopers = selectedDevelopers; // Assign selected developers
-            data.assignedDevelopers = developers
-            .filter(dev => selectedDevelopers.includes(dev._id))
-            .map(dev => ({ id: dev._id, name: dev.username }));
-
+            data.assignedDevelopers = selectedDevelopers; // Assign selected developers
+            // data.assignedDevelopers = JSON.stringify(
+            //     developers
+            //         .filter(dev => selectedDevelopers.includes(dev._id))
+            //         .map(dev => dev._id)
+            // );
+            
+            
             console.log(data);
 
             const res = await axios.post("/addProject", data);

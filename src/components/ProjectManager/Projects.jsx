@@ -23,10 +23,38 @@ const ProjectPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchProjects = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:8000/getAllProjects"); // Update URL if needed
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch projects");
+  //       }
+  //       const data = await response.json();
+  //       setProjects(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchProjects();
+  // }, []);
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);
+      setError(null);
+  
+      const userId = localStorage.getItem("id"); // Ensure we get the correct user ID
+      if (!userId) {
+        setError("User ID not found. Please log in again.");
+        setLoading(false);
+        return;
+      }
+  
       try {
-        const response = await fetch("http://localhost:8000/getAllProjects"); // Update URL if needed
+        const response = await fetch(`http://localhost:8000/getAllProjectsByUserId/${userId}`); // Ensure your backend has this endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch projects");
         }
@@ -38,10 +66,10 @@ const ProjectPage = () => {
         setLoading(false);
       }
     };
-
+  
     fetchProjects();
   }, []);
-
+  
   return (
     <div>
       <Navbar />
