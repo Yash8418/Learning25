@@ -27,11 +27,19 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch("http://localhost:8000/getAllProjects/");
-        localStorage.getItem("id");
         if (!response.ok) throw new Error("Failed to fetch projects");
-        console.log("developer: ", response);
+
         const data = await response.json();
-        setProjects(Array.isArray(data) ? data : []);
+
+        // Get developer ID from localStorage (assumed it's stored when logged in)
+        const developerId = localStorage.getItem("id");
+
+        // Filter projects assigned to this developer
+        const assignedProjects = data.filter(project => 
+          project.assignedDevelopers.includes(developerId)
+        );
+
+        setProjects(assignedProjects);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -49,13 +57,6 @@ const Projects = () => {
         <h1 className="page-title">Projects</h1>
         <p className="page-subtitle">Manage and track your assigned projects</p>
 
-        {/* <div className="project-actions">
-          <input type="text" placeholder="Search projects..." className="search-box" />
-          <button className="new-project-btn" onClick={() => navigate("/developer/addProject")}>
-            + New Project
-          </button>
-        </div> */}
-
         {loading ? (
           <p>Loading projects...</p>
         ) : error ? (
@@ -67,7 +68,7 @@ const Projects = () => {
             ))}
           </div>
         ) : (
-          <p className="no-projects">No projects available</p>
+          <p className="no-projects">No projects assigned to you</p>
         )}
       </div>
     </div>

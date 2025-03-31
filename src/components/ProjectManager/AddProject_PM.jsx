@@ -28,14 +28,14 @@ export const AddProject_PM = () => {
         }
     };
 
-    // const handleDeveloperSelect = (event) => {
-    //     const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
-    //     setSelectedDevelopers(selectedOptions);
-    // };
     const handleDeveloperSelect = (event) => {
-        const selectedDeveloperId = event.target.value; // Get only one value
-        setSelectedDevelopers(selectedDeveloperId); // Store it as a string, not an array
+        const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
+        setSelectedDevelopers(selectedOptions);
     };
+    // const handleDeveloperSelect = (event) => {
+    //     const selectedDeveloperId = event.target.value; // Get only one value
+    //     setSelectedDevelopers(selectedDeveloperId); // Store it as a string, not an array
+    // };
     
 
     const submitHandler = async (data) => {
@@ -63,6 +63,10 @@ export const AddProject_PM = () => {
             //         .filter(dev => selectedDevelopers.includes(dev._id))
             //         .map(dev => dev._id)
             // );
+            data.assignedDevelopers = developers
+            .filter(dev => selectedDevelopers.includes(dev._id))
+            .map(dev => dev._id);
+
             
             
             console.log(data);
