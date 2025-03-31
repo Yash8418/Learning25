@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Admin/AdminNavbar"; // Import navbar component
 import "../../css/dashboardcss.css";
+import { DashboardChart } from "./DashboardChart";
 
 export const AdminDashboard = () => {
   const [totalProjects, setTotalProjects] = useState(0);
@@ -45,7 +46,8 @@ export const AdminDashboard = () => {
 
         <div className="weekly-hours-container">
           <h3>Weekly Hours</h3>
-          <div className="weekly-chart">[Graph Placeholder]</div>
+          {/* <div className="weekly-chart"></div> */}
+        <DashboardChart /> {/* Chart component for weekly hours */}
         </div>
       </div>
     </div>
