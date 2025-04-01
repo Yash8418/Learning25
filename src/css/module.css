@@ -1,5 +1,7 @@
 .module-page-container {
     padding: 20px;
+    max-width: 1200px;
+    margin: auto;
   }
   
   .module-card {
@@ -17,14 +19,21 @@
   }
   
   .new-module-btn {
-    background-color: #007bff;
+    /* background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
+    border-radius: 5px; */
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
   }
   
   .new-module-btn:hover {
-    background-color: #0056b3;
+    background-color: #ffffff;
+    color: black;
   }

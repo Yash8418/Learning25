@@ -87,6 +87,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
+import "../../css/module.css";
 
 const ModuleCard = ({ moduleName, description, project_id, estimatedHours, startDate }) => {
   const projectName = project_id ? project_id.title : "Unknown Project";  // Fetch project name from project_id.title

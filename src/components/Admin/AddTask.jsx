@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./AdminNavbar";
-import "../../css/task.css";
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -13,17 +12,15 @@ const AddTask = () => {
     totalMinutes: "",
     projectId: "",
     moduleId: "",
-    statusId: "",
+    statusId: "67eb8d26088dd81c6481659f", // Default to "To do"
   });
 
   const [projects, setProjects] = useState([]);
   const [modules, setModules] = useState([]);
-  const [status, setStatus] = useState([]);
+  const priorities = ["Low", "Medium", "High"];
 
   useEffect(() => {
     fetchProjects();
-    fetchModules();
-    fetchStatus();
   }, []);
 
   const fetchProjects = async () => {
@@ -37,27 +34,17 @@ const AddTask = () => {
 
   const fetchModules = async (projectId) => {
     if (!projectId) {
-      setModules([]); // Reset modules when no project is selected
+      setModules([]);
       return;
     }
-  
     try {
-      const response = await axios.get(`http://localhost:8000/getProjectModule/${projectId}`);
-      setModules(response.data);
+      const response = await axios.get(`http://localhost:8000/getProjectModule?projectId=${projectId}`);
+      const filteredModules = response.data.filter(module => module.projectId === projectId);
+      setModules(filteredModules);
     } catch (error) {
       console.error("Error fetching modules:", error);
     }
   };
-
-const fetchStatus = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/getStatus");
-      setStatus(response.data);
-    } catch (error) {
-      console.error("Error fetching status:", error);
-      }
-
-    };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,13 +54,14 @@ const fetchStatus = async () => {
     }));
 
     if (name === "projectId") {
+      setModules([]); // Clear previous modules
       fetchModules(value);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!taskData.title || !taskData.description || !taskData.projectId) {
+    if (!taskData.title || !taskData.description || !taskData.projectId || !taskData.priority) {
       alert("Please fill in all required fields!");
       return;
     }
@@ -101,13 +89,15 @@ const fetchStatus = async () => {
             onChange={handleChange}
             required
           />
-          <input
-            type="text"
-            name="priority"
-            placeholder="Priority (Low, Medium, High)"
-            value={taskData.priority}
-            onChange={handleChange}
-          />
+
+          {/* Priority Dropdown */}
+          <select name="priority" value={taskData.priority} onChange={handleChange} required>
+            <option value="">Select Priority</option>
+            {priorities.map((priority) => (
+              <option key={priority} value={priority}>{priority}</option>
+            ))}
+          </select>
+
           <textarea
             name="description"
             placeholder="Task Description"
@@ -115,6 +105,7 @@ const fetchStatus = async () => {
             onChange={handleChange}
             required
           />
+          
           <input
             type="number"
             name="totalMinutes"
@@ -127,29 +118,15 @@ const fetchStatus = async () => {
           <select name="projectId" value={taskData.projectId} onChange={handleChange} required>
             <option value="">Select Project</option>
             {projects.map((project) => (
-              <option key={project._id} value={project._id}>
-                {project.title}
-              </option>
+              <option key={project._id} value={project._id}>{project.title}</option>
             ))}
           </select>
 
-          {/* Module Selection */}
+          {/* Module Selection (updates dynamically) */}
           <select name="moduleId" value={taskData.moduleId} onChange={handleChange}>
             <option value="">Select Module</option>
             {modules.map((module) => (
-              <option key={module._id} value={module._id}>
-                {module.moduleName}
-              </option>
-            ))}
-          </select>
-
-          {/* Status Selection */}
-          <select name="statusId" value={taskData.status} onChange={handleChange}>
-            <option value="">Select Status</option>
-            {status.map((status) => (
-              <option key={status._id} value={status._id}>
-                {status.statusName}
-              </option>
+              <option key={module._id} value={module._id}>{module.moduleName}</option>
             ))}
           </select>
 
