@@ -133,7 +133,7 @@ const Module_pm = () => {
         }
         const data = await response.json();
 
-        console.log("Modules Data:", data); // Debugging
+        // console.log("Modules Data:", data); // Debugging
         setModules(data);
       } catch (err) {
         setError(err.message);

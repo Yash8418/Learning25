@@ -3,19 +3,19 @@ import "../../css/project.css";
 import Navbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
-const ProjectCard = ({ title, description, estimatedHours, technology, completionDate }) => {
-  return (
-    <div className="project-card">
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <div className="project-info">
-        <span> {estimatedHours} hours</span>
-        <span> {technology} </span>
-        <span> {completionDate} </span>
-      </div>
-    </div>
-  );
-};
+// const ProjectCard = ({ title, description, estimatedHours, technology, completionDate }) => {
+//   return (
+//     <div className="project-card">
+//       <h3>{title}</h3>
+//       <p>{description}</p>
+//       <div className="project-info">
+//         <span> {estimatedHours} hours</span>
+//         <span> {technology} </span>
+//         <span> {completionDate} </span>
+//       </div>
+//     </div>
+//   );
+// };
 
 const ProjectPage = () => {
   const navigate = useNavigate();
@@ -25,6 +25,15 @@ const ProjectPage = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);
+      setError(null);
+
+      const userId = localStorage.getItem("id");
+      if (!userId) {
+        setError("User ID not found. Please log in again.");
+        setLoading(false);
+        return;
+      }
       try {
         const response = await fetch("http://localhost:8000/getAllProjects"); // Update URL if needed
         if (!response.ok) {
@@ -56,7 +65,7 @@ const ProjectPage = () => {
           </button>
         </div>
 
-        {loading ? (
+        {/* {loading ? (
           <p>Loading projects...</p>
         ) : error ? (
           <p className="error-message">{error}</p>
@@ -64,6 +73,41 @@ const ProjectPage = () => {
           <div className="project-list">
             {projects.map((project) => (
               <ProjectCard key={project.id} {...project} />
+            ))}
+          </div>
+        ) : (
+          <p className="no-projects">No projects available</p>
+        )} */}
+        {loading ? (
+          <p>Loading projects...</p>
+        ) : error ? (
+          <p className="error-message">{error}</p>
+        ) : projects.length > 0 ? (
+          <div className="project-list">
+            {projects.map((project) => (
+              <div className="project-card" key={project._id}>
+                <h3>{project.title}</h3>
+                <p><strong>Description:</strong> {project.description}</p>
+                <p><strong>Technology:</strong> {project.technology}</p>
+                <p><strong>Estimated Hours:</strong> {project.estimatedHours} hours</p>
+                <p><strong>Start Date:</strong> {new Date(project.startDate).toLocaleDateString()}</p>
+                <p><strong>Completion Date:</strong> {new Date(project.completionDate).toLocaleDateString()}</p>
+                
+                {/* ✅ FIXED: Now using project.developers directly */}
+                
+                <p><strong>Assigned Developers:</strong></p>
+                  <ul>
+                    {project.dev_id && project.dev_id.length > 0 ? (
+                      project.dev_id.map((dev) => (
+                        <li key={dev._id}>{dev.username || "Unknown Developer"}</li>
+                      ))
+                    ) : (
+                      <li>No developers assigned</li>
+                    )}
+                  </ul>
+
+
+              </div>
             ))}
           </div>
         ) : (

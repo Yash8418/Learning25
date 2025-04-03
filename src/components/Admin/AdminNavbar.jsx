@@ -56,6 +56,12 @@ const AdminNavbar = () => {
           Projects
         </Link>
         <Link
+          to="/admin/module"
+          className={`nav-link ${location.pathname === "/admin/modules" ? "active" : ""}`}
+        >
+          Modules
+        </Link>
+        <Link
           to="/admin/taskpage"
           className={`nav-link ${location.pathname === "/admin/taskpage" ? "active" : ""}`}
         >
@@ -67,12 +73,7 @@ const AdminNavbar = () => {
         >
           Reports
         </Link>
-        <Link
-          to="/admin/module"
-          className={`nav-link ${location.pathname === "/admin/modules" ? "active" : ""}`}
-        >
-          Modules
-        </Link>
+       
       </div>
 
       

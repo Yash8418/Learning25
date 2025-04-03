@@ -89,7 +89,7 @@ import Navbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 import "../../css/module.css";
 
-const ModuleCard = ({ moduleName, description, project_id, estimatedHours, startDate }) => {
+const ModuleCard = ({ moduleName, description, project_id, estimatedHours, startDate, dev_id }) => {
   const projectName = project_id ? project_id.title : "Unknown Project";  // Fetch project name from project_id.title
 
   return (
@@ -99,7 +99,18 @@ const ModuleCard = ({ moduleName, description, project_id, estimatedHours, start
       <div className="module-info">
         <span>Project: {projectName}</span> <br />
         <span>Estimated Hours: {estimatedHours}</span> <br />
-        <span>Start Date: {new Date(startDate).toLocaleDateString()}</span>
+        <span>Start Date: {new Date(startDate).toLocaleDateString()}</span><br />
+         {/* ✅ Fixed Assigned Developers Mapping */}
+         <span><strong>Assigned Developers:</strong></span>
+        <ul>
+          {dev_id && dev_id.length > 0 ? (
+            dev_id.map((dev, index) => (
+              <li key={index}>{dev.username || "Unknown Developer"}</li>
+            ))
+          ) : (
+            <li>No developers assigned</li>
+          )}
+        </ul>
       </div>
     </div>
   );

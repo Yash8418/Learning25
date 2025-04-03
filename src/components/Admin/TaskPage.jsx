@@ -69,6 +69,17 @@ const TaskPage = () => {
                 <p><strong>Status:</strong> {task.status_id?.statusName || "To Do"}</p>
                 <p><strong>Project:</strong> {task.project_id?.title || "N/A"}</p>
                 <p><strong>Module:</strong> {task.module_id?.moduleName || "N/A"}</p>
+                {/* Display Assigned Developers */}
+                <p><strong>Developers:</strong></p>
+                  <ul>
+                    {task.dev_id && task.dev_id.length > 0 ? (
+                      task.dev_id.map((dev) => (
+                        <li key={dev._id}>{dev.username}</li> // ✅ Show developer names
+                      ))
+                    ) : (
+                      <li>N/A</li>
+                    )}
+                  </ul>
               </div>
             ))}
         </div>
