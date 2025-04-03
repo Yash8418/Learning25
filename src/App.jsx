@@ -20,7 +20,6 @@ import DeveloperSettings from "./components/Developer/Settings";
 
 import ProjectManagerDashboard from "./components/ProjectManager/ProjectManagerDashboard";
 import ProjectManagerProjects from "./components/ProjectManager/Projects";
-import ProjectManagerTasks from "./components/ProjectManager/Tasks";
 import ProjectManagerDevelopers from "./components/ProjectManager/Developers";
 import ProjectManagerReports from "./components/ProjectManager/Reports";
 import ProjectManagerNotifications from "./components/ProjectManager/Notifications";
@@ -32,6 +31,10 @@ import Module from "./components/Admin/Module";
 import AddModule from "./components/Admin/AddModule";
 import TaskPage from "./components/Admin/TaskPage";
 import AddTask from "./components/Admin/AddTask";
+import TaskPage_pm from "./components/ProjectManager/TaskPage";
+import AddTask_pm from "./components/ProjectManager/AddTask";
+import AddModule_pm from "./components/ProjectManager/AddModule";
+import Module_pm from "./components/ProjectManager/Module";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
@@ -76,7 +79,11 @@ function App() {
           <Route path="/ProjectManager/dashboard" element={<ProjectManagerDashboard />} />
           <Route path="/ProjectManager/projects" element={<ProjectManagerProjects />} />
           <Route path="/ProjectManager/addProject" element={<AddProject_PM/>} />
-          <Route path="/ProjectManager/tasks" element={<ProjectManagerTasks />} />
+          <Route path="/ProjectManager/addModule" element={<AddModule_pm />} />
+          <Route path="/ProjectManager/module" element={<Module_pm />} />
+          {/* <Route path="/ProjectManager/tasks" element={<ProjectManagerTasks />} /> */}
+          <Route path="/ProjectManager/addTask" element={<AddTask_pm />} />
+          <Route path="/ProjectManager/tasks" element={< TaskPage_pm/>} />
           <Route path="/ProjectManager/developers" element={<ProjectManagerDevelopers />} />
           <Route path="/ProjectManager/reports" element={<ProjectManagerReports />} />
           <Route path="/ProjectManager/notifications" element={<ProjectManagerNotifications />} />

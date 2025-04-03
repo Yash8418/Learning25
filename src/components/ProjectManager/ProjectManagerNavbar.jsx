@@ -126,6 +126,12 @@ const ProjectManagerNavbar = () => {
           Projects
         </Link>
         <Link
+          to="/ProjectManager/module"
+          className={`nav-link ${location.pathname === "/ProjectManager/modules" ? "active" : ""}`}
+        >
+          Modules
+        </Link>
+        <Link
           to="/ProjectManager/tasks"
           className={`nav-link ${location.pathname === "/ProjectManager/tasks" ? "active" : ""}`}
         >

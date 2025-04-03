@@ -71,7 +71,7 @@ const AdminNavbar = () => {
           to="/admin/module"
           className={`nav-link ${location.pathname === "/admin/modules" ? "active" : ""}`}
         >
-          modules
+          Modules
         </Link>
       </div>
 
