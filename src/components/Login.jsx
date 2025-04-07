@@ -29,7 +29,7 @@ const Login = () => {
   
         toast.success("🎉 Login successful!", {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
@@ -47,7 +47,7 @@ const Login = () => {
           } else if (res.data.role.role === "Manager") {
             navigate("/projectManager");
           }
-        }, 1000); // 1 seconds delay
+        }, 1500); // 1 seconds delay
       }
     } catch (error) {
       console.error("Login Error:", error);
