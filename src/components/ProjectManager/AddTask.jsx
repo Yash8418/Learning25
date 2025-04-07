@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./ProjectManagerNavbar";
-import "../../css/task.css";
+// import "../../css/task.css";
 
 const AddTask_pm = () => {
   const navigate = useNavigate();
