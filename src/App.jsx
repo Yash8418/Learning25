@@ -35,6 +35,7 @@ import TaskPage_pm from "./components/ProjectManager/TaskPage";
 import AddTask_pm from "./components/ProjectManager/AddTask";
 import AddModule_pm from "./components/ProjectManager/AddModule";
 import Module_pm from "./components/ProjectManager/Module";
+import Developers from "./components/Admin/Developers";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
@@ -54,7 +55,7 @@ function App() {
           <Route path="/admin/projects" element={<ProjectPage />} />
           <Route path="/admin/taskpage" element={<TaskPage />} />
           <Route path="/admin/addTask" element={<AddTask />} />
-
+          <Route path="/admin/developers" element={<Developers />} />
           <Route path="/admin/reports" element={<Reports />} />
           <Route path="/admin/module" element={<Module/>} />
           <Route path="/admin/addModule" element={<AddModule />} />

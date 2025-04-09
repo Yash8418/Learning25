@@ -1,149 +1,66 @@
-// import React, { useEffect, useState } from "react";
-// // import "../../css/module.css";
-// import Navbar from "./AdminNavbar";
-// import { useNavigate } from "react-router-dom";
-
-// const Module = () => {
-//   const navigate = useNavigate();
-//   const [modules, setModules] = useState([]);
-//   const [projects, setProjects] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchModules = async () => {
-//       try {
-//         const response = await fetch("http://localhost:8000/getProjectModule");
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch modules");
-//         }
-//         const data = await response.json();
-//         setModules(data);
-//       } catch (err) {
-//         setError(err.message);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     const fetchProjects = async () => {
-//       try {
-//         const response = await fetch("http://localhost:8000/getAllProjects");
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch projects");
-//         }
-//         const data = await response.json();
-//         setProjects(data);
-//       } catch (err) {
-//         console.error("Error fetching projects:", err);
-//       }
-//     };
-
-//     fetchModules();
-//     fetchProjects();
-//   }, []);
-
-//   return (
-//     <div>
-//       <Navbar />
-//       <div className="module-page-container">
-//         <h1 className="page-title">Modules</h1>
-//         <p className="page-subtitle">Manage and track all your project modules</p>
-
-//         <div className="module-actions">
-//           <input type="text" placeholder="Search modules..." className="search-box" />
-//           <button className="new-module-btn" onClick={() => navigate("/admin/addModule")}>
-//             + New Module
-//           </button>
-//         </div>
-
-//         {loading ? (
-//           <p>Loading modules...</p>
-//         ) : error ? (
-//           <p className="error-message">Failed to fetch modules: {error}</p>
-//         ) : modules.length > 0 ? (
-//           <div className="module-list">
-//             {modules.map((module) => (
-//               <div key={module.id} className="module-card">
-//                 <h3>{module.name}</h3>
-//                 <p>{module.description}</p>
-//                 <span>Project: {module.projectName}</span>
-//                 <p>Estimated Hours: {module.estimatedHours}</p>
-//                 <p>Start Date: {new Date(module.startDate).toLocaleDateString()}</p>
-//               </div>
-//             ))}
-//           </div>
-//         ) : (
-//           <p className="no-modules">No modules available</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Module;
-
-
 import React, { useEffect, useState } from "react";
 import Navbar from "./ProjectManagerNavbar";
 import { useNavigate } from "react-router-dom";
 import "../../css/module.css";
 
-const ModuleCard = ({ moduleName, description, project_id, estimatedHours, startDate, dev_id }) => {
-  const projectName = project_id ? project_id.title : "Unknown Project";
-
-  return (
-    <div className="module-card">
-      <h3>{moduleName}</h3>
-      <p>{description}</p>
-      <div className="module-info">
-        <span><strong>Project:</strong> {projectName}</span> <br />
-        <span><strong>Estimated Hours:</strong> {estimatedHours}</span> <br />
-        <span><strong>Start Date:</strong> {new Date(startDate).toLocaleDateString()}</span> <br />
-
-        {/* ✅ Fixed Assigned Developers Mapping */}
-        <span><strong>Assigned Developers:</strong></span>
-        <ul>
-          {dev_id && dev_id.length > 0 ? (
-            dev_id.map((dev, index) => (
-              <li key={index}>{dev.username || "Unknown Developer"}</li>
-            ))
-          ) : (
-            <li>No developers assigned</li>
-          )}
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-
 const Module_pm = () => {
   const navigate = useNavigate();
   const [modules, setModules] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [selectedModule, setSelectedModule] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchModules = async () => {
       try {
         const response = await fetch("http://localhost:8000/getProjectModule");
-        if (!response.ok) {
-          throw new Error("Failed to fetch modules");
-        }
         const data = await response.json();
-
-        // console.log("Modules Data:", data); // Debugging
         setModules(data);
       } catch (err) {
-        setError(err.message);
+        setError("Failed to fetch modules");
+      }
+    };
+
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/getTask");
+        const data = await response.json();
+        setTasks(data);
+      } catch (err) {
+        setError("Failed to fetch tasks");
       } finally {
         setLoading(false);
       }
     };
 
     fetchModules();
+    fetchTasks();
   }, []);
+
+  const handleModuleClick = (module) => {
+    setSelectedModule(module);
+    setSelectedTaskId(null);
+  };
+
+  const getStatusClass = (status) => {
+    switch (status?.toLowerCase()) {
+      case "pending":
+        return "task-pending";
+      case "running":
+        return "task-inprogress";
+      case "completed":
+        return "task-completed";
+      default:
+        return "task-unknown";
+    }
+  };
+
+  const filteredModules = modules.filter((mod) =>
+    mod.moduleName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -153,8 +70,17 @@ const Module_pm = () => {
         <p className="page-subtitle">Manage and track all your project modules</p>
 
         <div className="module-actions">
-          <input type="text" placeholder="Search modules..." className="search-box" />
-          <button className="new-module-btn" onClick={() => navigate("/ProjectManager/addModule")}>
+          <input
+            type="text"
+            placeholder="Search modules..."
+            className="search-box"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button
+            className="new-module-btn"
+            onClick={() => navigate("/ProjectManager/addModule")}
+          >
             + New Module
           </button>
         </div>
@@ -163,16 +89,108 @@ const Module_pm = () => {
           <p>Loading modules...</p>
         ) : error ? (
           <p className="error-message">{error}</p>
-        ) : modules.length > 0 ? (
+        ) : filteredModules.length > 0 ? (
           <div className="module-list">
-            {modules.map((module) => (
-              <ModuleCard key={module._id} {...module} />
+            {filteredModules.map((module) => (
+              <div
+                className="module-card"
+                key={module._id}
+                onClick={() => handleModuleClick(module)}
+              >
+                <h3>{module.moduleName}</h3>
+                <p>{module.description}</p>
+                <div className="module-meta">
+                  <strong>Project:</strong> {module.project_id?.title || "Unknown"}
+                </div>
+              </div>
             ))}
           </div>
         ) : (
-          <p className="no-modules">No modules available</p>
+          <p className="no-modules">No modules match your search.</p>
         )}
       </div>
+
+      {/* Popup */}
+      {selectedModule && (
+        <div
+          className="popup-overlay"
+          onClick={() => {
+            setSelectedModule(null);
+            setSelectedTaskId(null);
+          }}
+        >
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-btn"
+              onClick={() => {
+                setSelectedModule(null);
+                setSelectedTaskId(null);
+              }}
+            >
+              ×
+            </button>
+
+            <h2>{selectedModule.moduleName}</h2>
+            <p><strong>Description:</strong> {selectedModule.description}</p>
+            <p><strong>Project:</strong> {selectedModule.project_id?.title || "Unknown"}</p>
+            <p><strong>Estimated Hours:</strong> {selectedModule.estimatedHours}</p>
+            <p><strong>Start Date:</strong> {new Date(selectedModule.startDate).toLocaleDateString()}</p>
+
+            <h4>Assigned Developers</h4>
+            <ul>
+              {selectedModule.dev_id?.length > 0 ? (
+                selectedModule.dev_id.map((dev, index) => (
+                  <li key={index}>{dev.username}</li>
+                ))
+              ) : (
+                <li>No developers assigned</li>
+              )}
+            </ul>
+
+            <h4>Tasks</h4>
+            {tasks.filter((task) => task.moduleId === selectedModule._id).length > 0 ? (
+              tasks
+                .filter((task) => task.moduleId === selectedModule._id)
+                .map((task) => {
+                  const statusName = task.status_id?.statusName || "Unknown";
+                  const taskStatusClass = getStatusClass(statusName);
+                  return (
+                    <div
+                      key={task._id}
+                      className={`task-card_module ${taskStatusClass}`}
+                      onClick={() =>
+                        setSelectedTaskId(selectedTaskId === task._id ? null : task._id)
+                      }
+                    >
+                      <p><strong>Title:</strong> {task.title}</p>
+                      <p><strong>Status:</strong> {statusName}</p>
+
+                      {selectedTaskId === task._id && (
+                        <div className="task-details">
+                          <h5>Task Details</h5>
+                          <p><strong>Description:</strong> {task.description}</p>
+                          <p><strong>Total Time:</strong> {task.totalMinutes} minutes</p>
+                          <p><strong>Priority:</strong> {task.priority}</p>
+
+                          <h5>Assigned Developers</h5>
+                          <ul>
+                            {task.dev_id?.length > 0 ? (
+                              task.dev_id.map((dev, i) => <li key={i}>{dev.username}</li>)
+                            ) : (
+                              <li>No developers</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+            ) : (
+              <p>No tasks available.</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

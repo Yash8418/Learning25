@@ -1,54 +1,69 @@
-/* General container styling */
+/* Container */
 .developers-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
+    padding: 30px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fa;
 }
 
-/* Developer cards list */
+/* Heading */
+.developers-container h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* Developer Cards Grid */
 .developers-list {
-    width: 100%;
-    max-width: 800px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* Individual developer card */
+/* Developer Card */
 .developer-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 260px;
-    text-align: center;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    text-align: left;
+    border: 2px solid transparent;
 }
 
-.developer-card:hover,
+.developer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
 .developer-card.selected {
-    background-color: #f1f1f1;
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    border: 2px solid #007bff;
+    background-color: #f0f8ff;
 }
 
 .developer-card h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 8px;
     color: #333;
 }
 
-/* Developer details popup */
+.developer-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+/* Fullscreen Popup */
 .full-screen-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
@@ -57,70 +72,48 @@
 }
 
 .full-screen-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    width: 50%;
-    max-height: 80vh;
+    background: #fff;
+    width: 80%;
+    max-height: 90vh;
+    border-radius: 16px;
+    padding: 30px;
     overflow-y: auto;
-    text-align: left;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
-/* Close button */
+/* Close Button */
 .close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #ff4d4d;
+    background: #dc3545;
     color: white;
     border: none;
-    padding: 5px 10px;
-    font-size: 18px;
+    font-size: 22px;
+    padding: 6px 12px;
+    border-radius: 50%;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 .close-btn:hover {
-    background: #cc0000;
+    background: #c82333;
 }
 
-/* Developer details section */
-.developer-details {
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-}
-
-/* Project, module, and task sections */
+/* Project Section */
 .project-section {
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-
-.module-section {
-    background: #e8e8e8;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 8px 0;
-}
-
-.task-card {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 14px;
+    background: #f9fbfc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid #e3e7ea;
 }
 
 .project-title {
-    cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     color: #007bff;
+    cursor: pointer;
+    font-size: 18px;
     margin-bottom: 10px;
     transition: color 0.3s ease;
 }
@@ -133,22 +126,36 @@
     color: #ff6600;
 }
 
+/* Modules */
 .modules-container {
     margin-top: 10px;
     padding-left: 15px;
 }
 
 .module-section {
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 5px;
+    background: #f0f4f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.module-section h4 {
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Task Cards */
+.task-card, li {
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 li {
     list-style: none;
-    background: #fff;
-    padding: 5px;
-    margin-top: 5px;
-    border-radius: 4px;
 }
