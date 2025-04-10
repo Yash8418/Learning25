@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./AdminNavbar";
-// import "../../css/task.css";
+import "../../css/addTask.css"; // Assuming you're using shared form CSS
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const AddTask = () => {
     totalMinutes: "",
     projectId: "",
     moduleId: "",
-    statusId: "67eb8d26088dd81c6481659f", // Default to "To do"
+    statusId: "67eb8d26088dd81c6481659f",
   });
 
   const [projects, setProjects] = useState([]);
@@ -55,7 +55,7 @@ const AddTask = () => {
     }));
 
     if (name === "projectId") {
-      setModules([]); // Clear previous modules
+      setModules([]);
       fetchModules(value);
     }
   };
@@ -79,57 +79,72 @@ const AddTask = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <h1>Add Task</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="title"
-            placeholder="Task Title"
-            value={taskData.title}
-            onChange={handleChange}
-            required
-          />
+      <div className="add-task-form">
+      <h2 className="page-title">Add Task</h2>
+      <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Task Title:</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Task Title"
+              value={taskData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          {/* Priority Dropdown */}
-          <select name="priority" value={taskData.priority} onChange={handleChange} required>
-            <option value="">Select Priority</option>
-            {priorities.map((priority) => (
-              <option key={priority} value={priority}>{priority}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Priority:</label>
+            <select name="priority" value={taskData.priority} onChange={handleChange} required>
+              <option value="">-- Select Priority --</option>
+              {priorities.map((priority) => (
+                <option key={priority} value={priority}>{priority}</option>
+              ))}
+            </select>
+          </div>
 
-          <textarea
-            name="description"
-            placeholder="Task Description"
-            value={taskData.description}
-            onChange={handleChange}
-            required
-          />
-          
-          <input
-            type="number"
-            name="totalMinutes"
-            placeholder="Total Minutes"
-            value={taskData.totalMinutes}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              placeholder="Task Description"
+              value={taskData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          {/* Project Selection */}
-          <select name="projectId" value={taskData.projectId} onChange={handleChange} required>
-            <option value="">Select Project</option>
-            {projects.map((project) => (
-              <option key={project._id} value={project._id}>{project.title}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Total Minutes:</label>
+            <input
+              type="number"
+              name="totalMinutes"
+              placeholder="e.g. 120"
+              value={taskData.totalMinutes}
+              onChange={handleChange}
+            />
+          </div>
 
-          {/* Module Selection (updates dynamically) */}
-          <select name="moduleId" value={taskData.moduleId} onChange={handleChange}>
-            <option value="">Select Module</option>
-            {modules.map((module) => (
-              <option key={module._id} value={module._id}>{module.moduleName}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Select Project:</label>
+            <select name="projectId" value={taskData.projectId} onChange={handleChange} required>
+              <option value="">-- Select a Project --</option>
+              {projects.map((project) => (
+                <option key={project._id} value={project._id}>{project.title}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Select Module:</label>
+            <select name="moduleId" value={taskData.moduleId} onChange={handleChange}>
+              <option value="">-- Select a Module --</option>
+              {modules.map((module) => (
+                <option key={module._id} value={module._id}>{module.moduleName}</option>
+              ))}
+            </select>
+          </div>
 
           <button type="submit">Add Task</button>
         </form>

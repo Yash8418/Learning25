@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./ProjectManagerNavbar";
-// import "../../css/task.css";
+import "../../css/addTask.css";
 
 const AddTask_pm = () => {
   const navigate = useNavigate();
@@ -53,12 +53,9 @@ const AddTask_pm = () => {
 
     try {
       const response = await axios.get(`http://localhost:8000/getProjectModule?projectId=${projectId}`);
-      
-      // Filter modules to only include those that belong to the selected project
       const filteredModules = response.data.filter((module) => module.projectId === projectId);
       setModules(filteredModules);
 
-      // Set developers for the selected project
       const project = projects.find((p) => p._id === projectId);
       setDevelopers(project?.dev_id || []);
     } catch (error) {
@@ -120,84 +117,106 @@ const AddTask_pm = () => {
     try {
       await axios.post("http://localhost:8000/addTask", finalTaskData);
       alert("Task added successfully!");
-      // navigate("/admin/getTask");
+      // navigate("/pm/getTask");
     } catch (error) {
       console.error("Error adding task:", error);
     }
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="container">
-        <h1>Add Task</h1>
+      <div className="add-task-form">
+        <h2 className="page-title">Add Task</h2>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="title"
-            placeholder="Task Title"
-            value={taskData.title}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={taskData.title}
+              onChange={handleChange}
+              placeholder="Task Title"
+              required
+            />
+          </div>
 
-          <select name="priority" value={taskData.priority} onChange={handleChange} required>
-            <option value="">Select Priority</option>
-            {priorities.map((priority) => (
-              <option key={priority} value={priority}>{priority}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Priority:</label>
+            <select name="priority" value={taskData.priority} onChange={handleChange} required>
+              <option value="">Select Priority</option>
+              {priorities.map((priority) => (
+                <option key={priority} value={priority}>{priority}</option>
+              ))}
+            </select>
+          </div>
 
-          <textarea
-            name="description"
-            placeholder="Task Description"
-            value={taskData.description}
-            onChange={handleChange}
-            required
-          />
-          
-          <input
-            type="number"
-            name="totalMinutes"
-            placeholder="Total Minutes"
-            value={taskData.totalMinutes}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={taskData.description}
+              onChange={handleChange}
+              placeholder="Task Description"
+              required
+            />
+          </div>
 
-          {/* Project Selection */}
-          <select name="projectId" value={taskData.projectId} onChange={handleChange} required>
-            <option value="">Select Project</option>
-            {projects.map((project) => (
-              <option key={project._id} value={project._id}>{project.title}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Total Minutes:</label>
+            <input
+              type="number"
+              name="totalMinutes"
+              value={taskData.totalMinutes}
+              onChange={handleChange}
+              placeholder="Total Minutes"
+            />
+          </div>
 
-          {/* Module Selection */}
-          <select name="moduleId" value={taskData.moduleId} onChange={handleChange} required>
-            <option value="">Select Module</option>
-            {modules.map((module) => (
-              <option key={module._id} value={module._id}>{module.moduleName}</option>
-            ))}
-          </select>
+          <div className="form-group">
+            <label>Project:</label>
+            <select name="projectId" value={taskData.projectId} onChange={handleChange} required>
+              <option value="">Select Project</option>
+              {projects.map((project) => (
+                <option key={project._id} value={project._id}>{project.title}</option>
+              ))}
+            </select>
+          </div>
 
-          {/* Developer Selection (Multi-Select) */}
-          <label>Assign Developers:</label>
-          <select multiple onChange={handleDeveloperSelect} value={selectedDevelopers} className="developer-select">
-            {filteredDevelopers.length === 0 ? (
-              <option value="">No Developers Available</option>
-            ) : (
-              filteredDevelopers.map((dev) => (
-                <option key={dev._id} value={dev._id}>
-                  {dev.username}
-                </option>
-              ))
-            )}
-          </select>
+          <div className="form-group">
+            <label>Module:</label>
+            <select name="moduleId" value={taskData.moduleId} onChange={handleChange} required>
+              <option value="">Select Module</option>
+              {modules.map((module) => (
+                <option key={module._id} value={module._id}>{module.moduleName}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Assign Developers:</label>
+            <select
+              multiple
+              className="developer-select"
+              onChange={handleDeveloperSelect}
+              value={selectedDevelopers}
+            >
+              {filteredDevelopers.length === 0 ? (
+                <option value="">No Developers Available</option>
+              ) : (
+                filteredDevelopers.map((dev) => (
+                  <option key={dev._id} value={dev._id}>
+                    {dev.username}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
 
           <button type="submit">Add Task</button>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

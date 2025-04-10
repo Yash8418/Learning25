@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../../css/module.css";
 import Navbar from "./ProjectManagerNavbar";
 import { useNavigate } from "react-router-dom";
+import "../../css/addModule.css"; // Updated CSS import
 
 const AddModule_pm = () => {
   const navigate = useNavigate();
@@ -35,10 +35,9 @@ const AddModule_pm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // When project is selected, update developers list
     if (name === "projectId") {
       const selectedProject = projects.find((project) => project._id === value);
-      setDevelopers(selectedProject?.dev_id || []); // Use dev_id array if available
+      setDevelopers(selectedProject?.dev_id || []);
     }
   };
 
@@ -68,40 +67,84 @@ const AddModule_pm = () => {
   return (
     <div>
       <Navbar />
-      <div className="form-container">
+      <div className="add-module-form">
         <h1 className="page-title">Add Project Module</h1>
 
         <form onSubmit={handleSubmit}>
-          <label>Select Project:</label>
-          <select name="projectId" value={formData.projectId} onChange={handleChange} required>
-            <option value="">-- Select a Project --</option>
-            {projects.map((project) => (
-              <option key={project._id} value={project._id}>
-                {project.title}
-              </option>
-            ))}
-          </select>
-
           <div className="form-group">
-            <label>Assign Developers</label>
-            <select multiple onChange={handleDeveloperSelect} className="developer-select">
-              {developers.map(dev => (
-                <option key={dev._id} value={dev._id}>{dev.username}</option>
+            <label>Select Project:</label>
+            <select
+              name="projectId"
+              value={formData.projectId}
+              onChange={handleChange}
+              required
+            >
+              <option value="">-- Select a Project --</option>
+              {projects.map((project) => (
+                <option key={project._id} value={project._id}>
+                  {project.title}
+                </option>
               ))}
             </select>
           </div>
 
-          <label>Module Name:</label>
-          <input type="text" name="moduleName" value={formData.moduleName} onChange={handleChange} required />
+          <div className="form-group">
+            <label>Assign Developers:</label>
+            <select
+              multiple
+              onChange={handleDeveloperSelect}
+              className="developer-select"
+            >
+              {developers.map((dev) => (
+                <option key={dev._id} value={dev._id}>
+                  {dev.username}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <label>Description:</label>
-          <textarea name="description" value={formData.description} onChange={handleChange} required />
+          <div className="form-group">
+            <label>Module Name:</label>
+            <input
+              type="text"
+              name="moduleName"
+              value={formData.moduleName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Estimated Hours:</label>
-          <input type="number" name="estimatedHours" value={formData.estimatedHours} onChange={handleChange} required />
+          <div className="form-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Start Date:</label>
-          <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} required />
+          <div className="form-group">
+            <label>Estimated Hours:</label>
+            <input
+              type="number"
+              name="estimatedHours"
+              value={formData.estimatedHours}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Start Date:</label>
+            <input
+              type="date"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
           <button type="submit">Add Module</button>
         </form>

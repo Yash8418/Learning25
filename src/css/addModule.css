@@ -1,0 +1,118 @@
+/* Center the form container */
+.add-module-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Form Box */
+.add-module-form form {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(20, 24, 32, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7);
+    text-align: left;
+    color: #f8f9fa;
+    margin: 0 auto;
+}
+
+/* Heading */
+.add-module-form .page-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Groups */
+.add-module-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.add-module-form label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #adb5bd;
+}
+
+/* Inputs, Textarea, Select */
+.add-module-form input,
+.add-module-form select,
+.add-module-form textarea {
+    width: 96%;
+    padding: 12px;
+    border: 1px solid #495057;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #495057;
+    transition: border 0.3s ease-in-out;
+    margin-bottom: 15px;
+}
+
+.add-module-form select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #495057;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #495057;
+    transition: border 0.3s ease-in-out;
+    margin-bottom: 15px;
+}
+.add-module-form textarea {
+    resize: none;
+}
+
+.add-module-form input:focus,
+.add-module-form select:focus,
+.add-module-form textarea:focus {
+    border: 1px solid #4caf50;
+    outline: none;
+}
+
+/* Developer multi-select */
+.add-module-form .developer-select {
+    height: 100px;
+}
+
+/* Submit Button */
+.add-module-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #212529;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.add-module-form button[type="submit"]:hover {
+    background: #4caf50;
+    color: #fff;
+}
+
+/* Responsive Fix */
+@media (max-width: 600px) {
+    .add-module-form form {
+        width: 90%;
+        padding: 20px;
+    }
+}

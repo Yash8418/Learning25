@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./ProjectManagerNavbar";
 import "../../css/project.css";
+import { useNavigate } from "react-router-dom";
+
 
 const ProjectManagerProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -10,6 +12,8 @@ const ProjectManagerProjects = () => {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [modules, setModules] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchProjects();
@@ -102,7 +106,13 @@ const ProjectManagerProjects = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="new-project-btn">+ Add Project</button>
+          <button
+            className="new-project-btn"
+            onClick={() => navigate("/ProjectManager/addProject")}
+          >
+            + Add Project
+          </button>
+
         </div>
 
         <div className="project-list">
