@@ -80,7 +80,7 @@ const Tasks = () => {
           <div className="kanban-column pending">
             <h2>Pending</h2>
             {pendingTasks.map(task => (
-              <div key={task._id} className="task-card">
+              <div key={task._id} className="task-card_dev">
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
                 <p>Status: {task.status_id?.statusName ?? "Unknown"}</p>
@@ -95,7 +95,7 @@ const Tasks = () => {
           <div className="kanban-column running">
             <h2>Running</h2>
             {runningTasks.map(task => (
-              <div key={task._id} className="task-card">
+              <div key={task._id} className="task-card_dev">
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
                 <p>Status: {task.status_id?.statusName ?? "Unknown"}</p>
@@ -110,7 +110,7 @@ const Tasks = () => {
           <div className="kanban-column completed">
             <h2>Completed</h2>
             {completedTasks.map(task => (
-              <div key={task._id} className="task-card">
+              <div key={task._id} className="task-card_dev">
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
                 <p>Status: {task.status_id?.statusName ?? "Unknown"}</p>

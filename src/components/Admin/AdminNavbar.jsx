@@ -92,9 +92,9 @@ const AdminNavbar = () => {
 
         {menuOpen && (
           <div ref={menuRef} className="dropdown-card">
-            <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
+            {/* <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
               🔔 Notifications
-            </div>
+            </div> */}
             <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
               ⚙️ Settings
             </div>

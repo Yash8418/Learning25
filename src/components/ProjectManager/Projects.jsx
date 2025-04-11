@@ -12,6 +12,8 @@ const ProjectManagerProjects = () => {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [modules, setModules] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editProjectData, setEditProjectData] = useState({});
   const navigate = useNavigate();
 
 
@@ -155,7 +157,84 @@ const ProjectManagerProjects = () => {
               ×
             </button>
 
-            <h2>{selectedProject.title}</h2>
+                            
+            {!isEditMode ? (
+              <>
+                <h2>{selectedProject.title}</h2>
+                <button className="edit-btn" onClick={() => {
+                  setIsEditMode(true);
+                  setEditProjectData(selectedProject);
+                }}>
+                  ✎ Edit
+                </button>
+              </>
+            ) : (
+              <div className="edit-form">
+                <label>Title:</label>
+                <input
+                  type="text"
+                  value={editProjectData.title}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, title: e.target.value })}
+                />
+                <label>Description:</label>
+                <textarea
+                  value={editProjectData.description}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, description: e.target.value })}
+                />
+                <label>Technology:</label>
+                <input
+                  type="text"
+                  value={editProjectData.technology}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, technology: e.target.value })}
+                />
+                <label>Estimated Hours:</label>
+                <input
+                  type="number"
+                  value={editProjectData.estimatedHours}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, estimatedHours: parseInt(e.target.value) })}
+                />
+                <label>Start Date:</label>
+                <input
+                  type="datetime-local"
+                  value={new Date(editProjectData.startDate).toISOString().slice(0, 16)}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, startDate: new Date(e.target.value).toISOString() })}
+                />
+                <label>Completion Date:</label>
+                <input
+                  type="datetime-local"
+                  value={new Date(editProjectData.completionDate).toISOString().slice(0, 16)}
+                  onChange={(e) => setEditProjectData({ ...editProjectData, completionDate: new Date(e.target.value).toISOString() })}
+                />
+                <div className="edit-actions">
+                  <button onClick={async () => {
+                    try {
+                      const res = await fetch(`http://localhost:8000/partialUpdateProject/${selectedProject._id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(editProjectData),
+                      });
+
+                      if (res.ok) {
+                        alert("Project updated successfully!");
+                        await fetchProjects(); // refresh
+                        setIsEditMode(false);
+                        setSelectedProject(null);
+                      } else {
+                        alert("Failed to update project");
+                      }
+                    } catch (err) {
+                      console.error("Update error:", err);
+                    }
+                  }}>
+                    ✅ Save
+                  </button>
+                  <button onClick={() => setIsEditMode(false)}>❌ Cancel</button>
+                </div>
+              </div>
+            )}
+
             <p><strong>Start Date:</strong> {formatDateTime(selectedProject.startDate)}</p>
             <p><strong>Completion Date:</strong> {formatDateTime(selectedProject.completionDate)}</p>
 

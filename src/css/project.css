@@ -220,6 +220,22 @@ li {
   /* margin-top: 5px; */
   border-radius: 4px;
 }
+.edit-form label {
+  display: block;
+  margin-top: 10px;
+}
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+}
+.edit-actions {
+  margin-top: 12px;
+}
+.edit-actions button {
+  margin-right: 8px;
+}
 
 
 /* Apply background color based on status */

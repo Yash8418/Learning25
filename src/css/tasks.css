@@ -5,170 +5,76 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Page Container and Title */
+.module-page-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
 .page-title {
   text-align: center;
-  font-size: 32px;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
   color: #333;
-}
-
-
-/* Navigation Bar */
-.navbar {
-  background-color: #111;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
-}
-/* .priority-low {
-  background-color: #d4edda;
-  border-left: 5px solid #28a745;
-}
-
-.priority-medium {
-  background-color: #fff3cd;
-  border-left: 5px solid #ffc107;
-}
-
-.priority-high {
-  background-color: #f8d7da;
-  border-left: 5px solid #dc3545;
-} */
-
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
-
-.navbar a.active {
-  background-color: #555;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
-
-/* Page Content */
-.container-task {
-  /* width: 100%; */
-  max-width: 1200px;
-  margin:  auto;
-  /* background: white; */
-  padding: 20px;
-  /* border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-}
-
-h1 {
-  text-align: left;
-  font-size: 26px;
-  font-weight: bold;
-}
-
-/* Search Bar and Button Section */
-.task-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
 }
 
-.search-input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 250px;
+/* Task Header - Search + Add Button */
+.module-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.add-task-btn {
-  padding: 10px 15px;
+.search-box {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+.new-module-btn {
   background-color: black;
   color: white;
   border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-.project-filter {
-  width: 250px;
-  padding: 12px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  outline: none;
-  transition: all 0.3s ease-in-out;
+.new-module-btn:hover {
+  background-color: #333;
 }
 
-/* .project-filter:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-} */
-
-
-.add-task-btn:hover {
-  background-color: #444;
-}
-
-/* Task Cards */
-.task-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-/* .task-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid black;
-  transition: transform 0.2s;
+/* Task Cards Grid */
+.module-list {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-} */
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
+/* Task Card */
 .task-card {
   background: #fff;
-  padding: 15px;
+  padding: 20px;
   border-radius: 8px;
-  border: 3px solid black !important; /* Ensure border is applied */
-  transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  border: 2px solid black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 300px;
+  max-width: 350px;
+  flex: 1;
+  animation: fadeInUp 0.6s ease-in-out;
+  cursor: pointer;
 }
-
-.priority-low {
-  background-color: #d4edda;
-  border: 3px solid #28a745 !important; /* Force green border */
-}
-
-.priority-medium {
-  background-color: #fff3cd;
-  border: 3px solid #ffc107 !important; /* Force yellow border */
-}
-
-.priority-high {
-  background-color: #f8d7da;
-  border: 3px solid #dc3545 !important; /* Force red border */
-}
-
-/* Remove default blue focus styles */
-.task-card:focus, .task-card:active {
-  outline: none !important;
-  border: inherit !important;
-}
-
 
 .task-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .task-card h2 {
@@ -182,17 +88,105 @@ h1 {
   margin: 5px 0;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container-task {
-      width: 95%;
+/* Priority Styles */
+.priority-low {
+  background-color: #d4edda;
+  border: 2px solid #28a745;
+}
+
+.priority-medium {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+}
+
+.priority-high {
+  background-color: #f8d7da;
+  border: 2px solid #dc3545;
+}
+
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.4s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .task-header {
-      flex-direction: column;
-      align-items: flex-start;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .search-input {
-      width: 100%;
-      margin-bottom: 10px;
-  }
+}
+
+/* Edit Styles */
+.edit-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.edit-btn:hover {
+  background-color: #ffa500;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-actions button {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
 }

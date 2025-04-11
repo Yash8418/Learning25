@@ -221,3 +221,33 @@ li {
 .popup-content li {
   margin: 4px 0;
 }
+.edit-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.edit-btn:hover {
+  background-color: #ffa500;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-actions button {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}

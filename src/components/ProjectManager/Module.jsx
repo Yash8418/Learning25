@@ -12,6 +12,8 @@ const Module_pm = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editModuleData, setEditModuleData] = useState({});
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -43,6 +45,7 @@ const Module_pm = () => {
   const handleModuleClick = (module) => {
     setSelectedModule(module);
     setSelectedTaskId(null);
+    setIsEditMode(false);
   };
 
   const getStatusClass = (status) => {
@@ -110,13 +113,13 @@ const Module_pm = () => {
         )}
       </div>
 
-      {/* Popup */}
       {selectedModule && (
         <div
           className="popup-overlay"
           onClick={() => {
             setSelectedModule(null);
             setSelectedTaskId(null);
+            setIsEditMode(false);
           }}
         >
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
@@ -125,16 +128,92 @@ const Module_pm = () => {
               onClick={() => {
                 setSelectedModule(null);
                 setSelectedTaskId(null);
+                setIsEditMode(false);
               }}
             >
               ×
             </button>
 
-            <h2>{selectedModule.moduleName}</h2>
-            <p><strong>Description:</strong> {selectedModule.description}</p>
-            <p><strong>Project:</strong> {selectedModule.project_id?.title || "Unknown"}</p>
-            <p><strong>Estimated Hours:</strong> {selectedModule.estimatedHours}</p>
-            <p><strong>Start Date:</strong> {new Date(selectedModule.startDate).toLocaleDateString()}</p>
+            {!isEditMode ? (
+              <>
+                <h2>{selectedModule.moduleName}</h2>
+                <button
+                  className="edit-btn"
+                  onClick={() => {
+                    setIsEditMode(true);
+                    setEditModuleData(selectedModule);
+                  }}
+                >
+                  ✎ Edit
+                </button>
+                <p><strong>Description:</strong> {selectedModule.description}</p>
+                <p><strong>Project:</strong> {selectedModule.project_id?.title || "Unknown"}</p>
+                <p><strong>Estimated Hours:</strong> {selectedModule.estimatedHours}</p>
+                <p><strong>Start Date:</strong> {new Date(selectedModule.startDate).toLocaleDateString()}</p>
+              </>
+            ) : (
+              <div className="edit-form">
+                <label>Module Name:</label>
+                <input
+                  type="text"
+                  value={editModuleData.moduleName}
+                  onChange={(e) =>
+                    setEditModuleData({ ...editModuleData, moduleName: e.target.value })
+                  }
+                />
+                <label>Description:</label>
+                <textarea
+                  value={editModuleData.description}
+                  onChange={(e) =>
+                    setEditModuleData({ ...editModuleData, description: e.target.value })
+                  }
+                />
+                <label>Estimated Hours:</label>
+                <input
+                  type="number"
+                  value={editModuleData.estimatedHours}
+                  onChange={(e) =>
+                    setEditModuleData({ ...editModuleData, estimatedHours: parseInt(e.target.value) })
+                  }
+                />
+                <label>Start Date:</label>
+                <input
+                  type="date"
+                  value={new Date(editModuleData.startDate).toISOString().split("T")[0]}
+                  onChange={(e) =>
+                    setEditModuleData({ ...editModuleData, startDate: new Date(e.target.value).toISOString() })
+                  }
+                />
+                <div className="edit-actions">
+                  <button
+                    onClick={async () => {
+                      try {
+                        const res = await fetch(`http://localhost:8000/partialUpdateProjectModule/${selectedModule._id}`, {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(editModuleData),
+                        });
+
+                        if (res.ok) {
+                          alert("Module updated successfully!");
+                          const refreshed = await fetch("http://localhost:8000/getProjectModule");
+                          const updated = await refreshed.json();
+                          setModules(updated);
+                          setSelectedModule(null);
+                        } else {
+                          alert("Failed to update module.");
+                        }
+                      } catch (err) {
+                        console.error("Error updating module:", err);
+                      }
+                    }}
+                  >
+                    ✅ Save
+                  </button>
+                  <button onClick={() => setIsEditMode(false)}>❌ Cancel</button>
+                </div>
+              </div>
+            )}
 
             <h4>Assigned Developers</h4>
             <ul>
