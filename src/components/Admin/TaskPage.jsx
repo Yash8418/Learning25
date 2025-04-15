@@ -108,7 +108,7 @@ const TaskPage = () => {
                 <p><strong>Project:</strong> {task.project_id?.title || "N/A"}</p>
                 <p><strong>Module:</strong> {task.module_id?.moduleName || "N/A"}</p>
                 <p><strong>Developers:</strong></p>
-                <ul>
+                <div>
                   {task.dev_id && task.dev_id.length > 0 ? (
                     task.dev_id.map((dev) => (
                       <li key={dev._id}>{dev.username}</li>
@@ -116,7 +116,7 @@ const TaskPage = () => {
                   ) : (
                     <li>N/A</li>
                   )}
-                </ul>
+                </div>
               </div>
             ))}
         </div>
@@ -152,7 +152,7 @@ const TaskPage = () => {
                 <p><strong>Project:</strong> {selectedTask.project_id?.title}</p>
                 <p><strong>Module:</strong> {selectedTask.module_id?.moduleName}</p>
                 <p><strong>Developers:</strong></p>
-                <ul>
+                <>
                   {selectedTask.dev_id && selectedTask.dev_id.length > 0 ? (
                     selectedTask.dev_id.map((dev) => (
                       <li key={dev._id}>{dev.username}</li>
@@ -160,7 +160,7 @@ const TaskPage = () => {
                   ) : (
                     <li>N/A</li>
                   )}
-                </ul>
+                </>
               </>
             ) : (
               <div className="edit-form">

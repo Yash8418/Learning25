@@ -269,11 +269,11 @@ const Projects = () => {
                                   {task.dev_id && task.dev_id.length > 0 ? (
                                     <div>
                                       <p><strong>Developers:</strong></p>
-                                      <ul>
+                                      <li>
                                         {task.dev_id.map((dev) => (
                                           <li key={dev._id}>{dev.username}</li>
                                         ))}
-                                      </ul>
+                                      </li>
                                     </div>
                                   ) : (
                                     <p><strong>Developers:</strong> N/A</p>

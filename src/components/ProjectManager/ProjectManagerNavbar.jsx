@@ -160,7 +160,7 @@ const ProjectManagerNavbar = () => {
         {menuOpen && (
           <div ref={menuRef} className="dropdown-card">
             {/* <div className="dropdown-item" onClick={() => navigate("/ProjectManager/notifications")}>🔔 Notifications</div> */}
-            <div className="dropdown-item" onClick={() => navigate("/ProjectManager/settings")}>⚙️ Settings</div>
+            {/* <div className="dropdown-item" onClick={() => navigate("/ProjectManager/settings")}>⚙️ Settings</div> */}
             <div className="dropdown-item " onClick={handleLogout}>🚪 Sign Out </div>
           </div>
         )}

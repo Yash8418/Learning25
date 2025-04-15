@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../../css/navbar.css";
@@ -66,12 +67,12 @@ const DeveloperNavbar = () => {
 
         {menuOpen && (
           <div ref={menuRef} className="dropdown-card">
-            <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
+            {/* <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
               🔔 Notifications
             </div>
             <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
               ⚙️ Settings
-            </div>
+            </div> */}
             <div className="dropdown-item " onClick={handleLogout}>
               🚪 Sign Out
             </div>

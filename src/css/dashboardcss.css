@@ -68,17 +68,20 @@ html, body {
 
 /* Weekly Hours Placeholder */
 .weekly-hours-container {
-  text-align: center;
-  margin: 30px 0;
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.weekly-chart {
-  width: 100%;
-  height: 150px;
-  background: #ddd;
-  border-radius: 8px;
-  margin-top: 10px;
-}
+  /* .weekly-chart {
+    width: 100%;
+    height: 150px;
+    background: #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+  } */
 
 /* Responsive Design */
 @media (max-width: 768px) {

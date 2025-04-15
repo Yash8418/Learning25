@@ -7,9 +7,9 @@ const ProjectManagerDashboard = () => {
   const [metrics, setMetrics] = useState({
     totalProjects: 0,
     ongoingProjects: 0,
-    completedProjects: 0,
+    completedTask: 0,
     pendingTasks: 0,
-    overdueTasks: 0,
+    onGoingTask: 0,
     developerEfficiency: "85%", // Placeholder value
   });
   const [projects, setProjects] = useState([]);
@@ -28,8 +28,9 @@ const ProjectManagerDashboard = () => {
       setMetrics((prev) => ({
         ...prev,
         totalProjects: projectData.length,
-        ongoingProjects: projectData.filter((p) => p.status === "ongoing").length,
+        ongoingProjects: projectData.filter((p) => p.status === "running").length,
         completedProjects: projectData.filter((p) => p.status === "completed").length,
+
       }));
     } catch (error) {
       console.error("Error fetching metrics:", error);
@@ -50,11 +51,13 @@ const ProjectManagerDashboard = () => {
     try {
       const response = await fetch("http://localhost:8000/getTask");
       const data = await response.json();
+      console.log("tasks: ",data);
       setTasks(data);
       setMetrics((prev) => ({
         ...prev,
-        pendingTasks: data.filter((task) => task.status === "pending").length,
-        overdueTasks: data.filter((task) => task.status === "overdue").length,
+        pendingTasks: data.filter((task) => task.status_id.statusName === "pending").length,
+        onGoingTask: data.filter((task) => task.status_id.statusName === "running").length,
+        completedTask: data.filter((task) => task.status_id.statusName === "completed").length,
       }));
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -68,27 +71,31 @@ const ProjectManagerDashboard = () => {
       <div className="dashboard-header">
           <h1>Welcome back, Project Manager</h1>
         </div>
+        {/* <div className="weekly-hours-container">
+          <h3>Project Progress Summary</h3> */}
+          {/* Placeholder for charts */}
+        {/* </div> */}
         {/* <h1>Welcome back, Project Manager</h1> */}
         <div className="cards-container">
           <div className="card">
             <h3>Total Projects</h3>
             <p>{metrics.totalProjects}</p>
           </div>
-          <div className="card">
+          {/* <div className="card">
             <h3>Ongoing Projects</h3>
             <p>{metrics.ongoingProjects}</p>
-          </div>
+          </div> */}
           <div className="card">
-            <h3>Completed Projects</h3>
-            <p>{metrics.completedProjects}</p>
+            <h3>Completed Task</h3>
+            <p>{metrics.completedTask}</p>
           </div>
           <div className="card">
             <h3>Pending Tasks</h3>
             <p>{metrics.pendingTasks}</p>
           </div>
           <div className="card">
-            <h3>Overdue Tasks</h3>
-            <p>{metrics.overdueTasks}</p>
+            <h3>Ongoing Tasks</h3>
+            <p>{metrics.onGoingTask}</p>
           </div>
           {/* <div className="card">
             <h3>Developer Efficiency</h3>
@@ -97,10 +104,7 @@ const ProjectManagerDashboard = () => {
         </div>
 
         {/* Add charts or tables */}
-        <div className="weekly-hours-container">
-          <h3>Project Progress Summary</h3>
-          {/* Placeholder for charts */}
-        </div>
+     
       </div>
     </div>
   );

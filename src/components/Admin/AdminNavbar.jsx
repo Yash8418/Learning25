@@ -57,7 +57,7 @@ const AdminNavbar = () => {
         </Link>
         <Link
           to="/admin/module"
-          className={`nav-link ${location.pathname === "/admin/modules" ? "active" : ""}`}
+          className={`nav-link ${location.pathname === "/admin/module" ? "active" : ""}`}
         >
           Modules
         </Link>
@@ -95,9 +95,9 @@ const AdminNavbar = () => {
             {/* <div className="dropdown-item" onClick={() => navigate("/developer/notifications")}>
               🔔 Notifications
             </div> */}
-            <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
+            {/* <div className="dropdown-item" onClick={() => navigate("/developer/settings")}>
               ⚙️ Settings
-            </div>
+            </div> */}
             <div className="dropdown-item " onClick={handleLogout}>
               🚪 Sign Out
             </div>
