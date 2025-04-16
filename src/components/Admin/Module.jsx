@@ -368,6 +368,9 @@ const AdminModule = () => {
       } catch (err) {
         console.error("Failed to fetch tasks");
       }
+      finally {
+        setLoading(false);
+      }
     };
 
     fetchModules();
@@ -378,25 +381,25 @@ const AdminModule = () => {
     setSelectedModule(module);
     setSelectedTaskId(null);
     setIsEditMode(false);
-    setIsTaskEditMode(false);
+    // setIsTaskEditMode(false);
   };
 
   // Handle viewing a task
-  const handleTaskClick = (task) => {
-    setSelectedTaskId(task._id);
-    setIsTaskEditMode(false);
-    setEditTaskData({
-      _id: task._id,
-      title: task.taskName || "", // Map taskName to title for the API
-      description: task.description || "",
-      totalMinutes: Math.round((task.estimatedHours || 0) * 60) // Convert hours to minutes
-    });
-  };
+  // const handleTaskClick = (task) => {
+  //   setSelectedTaskId(task._id);
+  //   setIsTaskEditMode(false);
+  //   setEditTaskData({
+  //     _id: task._id,
+  //     title: task.taskName || "", // Map taskName to title for the API
+  //     description: task.description || "",
+  //     totalMinutes: Math.round((task.estimatedHours || 0) * 60) // Convert hours to minutes
+  //   });
+  // };
 
   // Toggle task edit mode
-  const handleTaskEditClick = () => {
-    setIsTaskEditMode(true);
-  };
+  // const handleTaskEditClick = () => {
+  //   setIsTaskEditMode(true);
+  // };
 
   const getStatusClass = (status) => {
     switch (status?.toLowerCase()) {
@@ -415,48 +418,48 @@ const AdminModule = () => {
     mod.moduleName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleTaskEditSave = async () => {
-    try {
-      // Convert estimated hours to minutes for the API
-      const taskUpdateData = {
-        title: editTaskData.title,
-        totalMinutes: editTaskData.totalMinutes
-      };
+  // const handleTaskEditSave = async () => {
+  //   try {
+  //     // Convert estimated hours to minutes for the API
+  //     const taskUpdateData = {
+  //       title: editTaskData.title,
+  //       totalMinutes: editTaskData.totalMinutes
+  //     };
 
-      const res = await fetch(`http://localhost:8000/updateTask/${editTaskData._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(taskUpdateData),
-      });
+  //     const res = await fetch(`http://localhost:8000/updateTask/${editTaskData._id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(taskUpdateData),
+  //     });
 
-      if (res.ok) {
-        alert("Task updated successfully!");
-        // Refresh tasks after update
-        const refreshedTasks = await fetch("http://localhost:8000/getTask");
-        const updatedTasks = await refreshedTasks.json();
+  //     if (res.ok) {
+  //       alert("Task updated successfully!");
+  //       // Refresh tasks after update
+  //       const refreshedTasks = await fetch("http://localhost:8000/getTask");
+  //       const updatedTasks = await refreshedTasks.json();
         
-        // Update the tasks in state
-        setTasks(updatedTasks);
-        setIsTaskEditMode(false);
-      } else {
-        const errorData = await res.json();
-        alert(`Failed to update task: ${errorData.message || "Unknown error"}`);
-      }
-    } catch (err) {
-      console.error("Error updating task:", err);
-      alert(`Error updating task: ${err.message}`);
-    }
-  };
+  //       // Update the tasks in state
+  //       setTasks(updatedTasks);
+  //       setIsTaskEditMode(false);
+  //     } else {
+  //       const errorData = await res.json();
+  //       alert(`Failed to update task: ${errorData.message || "Unknown error"}`);
+  //     }
+  //   } catch (err) {
+  //     console.error("Error updating task:", err);
+  //     alert(`Error updating task: ${err.message}`);
+  //   }
+  // };
 
-  // Get the selected task from tasks array
-  const selectedTask = tasks.find(task => task._id === selectedTaskId);
+  // // Get the selected task from tasks array
+  // const selectedTask = tasks.find(task => task._id === selectedTaskId);
 
-  // Calculate hours from minutes for display and editing
-  const calculateHoursFromMinutes = (minutes) => {
-    return minutes ? minutes / 60 : 0;
-  };
+  // // Calculate hours from minutes for display and editing
+  // const calculateHoursFromMinutes = (minutes) => {
+  //   return minutes ? minutes / 60 : 0;
+  // };
 
   return (
     <div>
@@ -505,7 +508,7 @@ const AdminModule = () => {
             setSelectedModule(null);
             setSelectedTaskId(null);
             setIsEditMode(false);
-            setIsTaskEditMode(false);
+            // setIsTaskEditMode(false);
           }}
         >
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
@@ -515,7 +518,7 @@ const AdminModule = () => {
                 setSelectedModule(null);
                 setSelectedTaskId(null);
                 setIsEditMode(false);
-                setIsTaskEditMode(false);
+                // setIsTaskEditMode(false);
               }}
             >
               ×
@@ -643,71 +646,35 @@ const AdminModule = () => {
                     <div
                       key={task._id}
                       className={`task-card_module ${taskStatusClass}`}
-                      onClick={() => handleTaskClick(task)}
+                      onClick={() =>
+                        setSelectedTaskId(selectedTaskId === task._id ? null : task._id)
+                      }
                     >
-                      <h3>{task.title}</h3>
+                      <p><strong>Title:</strong> {task.title}</p>
                       <p><strong>Status:</strong> {statusName}</p>
+
+                      {selectedTaskId === task._id && (
+                        <div className="task-details">
+                          <h5>Task Details</h5>
+                          <p><strong>Description:</strong> {task.description}</p>
+                          <p><strong>Total Time:</strong> {task.totalMinutes} minutes</p>
+                          <p><strong>Priority:</strong> {task.priority}</p>
+
+                          <h5>Assigned Developers</h5>
+                          <ul>
+                            {task.dev_id?.length > 0 ? (
+                              task.dev_id.map((dev, i) => <li key={i}>{dev.username}</li>)
+                            ) : (
+                              <li>No developers</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   );
                 })
             ) : (
-              <p>No tasks assigned to this module.</p>
-            )}
-
-            {/* Display Task Details Section */}
-            {selectedTaskId && !isTaskEditMode && selectedTask && (
-              <div className="task-details">
-                <h4>Task Details</h4>
-                <p><strong>Task Name:</strong> {selectedTask.title}</p>
-                <p><strong>Status:</strong> {selectedTask.status_id?.statusName || "Unknown"}</p>
-                <p><strong>Estimated Hours:</strong> {calculateHoursFromMinutes(selectedTask.totalMinutes)}</p>
-                {selectedTask.description && (
-                  <p><strong>Description:</strong> {selectedTask.description}</p>
-                )}
-                <button 
-                  className="edit-task-btn"
-                  onClick={handleTaskEditClick}
-                >
-                  ✎ Edit Task
-                </button>
-              </div>
-            )}
-
-            {/* Task Edit Form */}
-            {isTaskEditMode && (
-              <div className="edit-task-form">
-                <h4>Edit Task : {selectedTask.title}</h4>
-                <label>Task Name:</label>
-                <input
-                  type="text"
-                  value={editTaskData.title}
-                  onChange={(e) =>
-                    setEditTaskData({ ...editTaskData, title: e.target.value })
-                  }
-                />
-                <label>Estimated Hours:</label>
-                <input
-                  type="number"
-                  value={calculateHoursFromMinutes(editTaskData.totalMinutes)}
-                  placeholder="in hours"
-                  onChange={(e) =>
-                    setEditTaskData({ 
-                      ...editTaskData, 
-                      totalMinutes: Math.round(Number(e.target.value) * 60) 
-                    })
-                  }
-                />
-                <div className="edit-actions">
-                  <button onClick={handleTaskEditSave}>✅ Save Task</button>
-                  <button
-                    onClick={() => {
-                      setIsTaskEditMode(false);
-                    }}
-                  >
-                    ❌ Cancel
-                  </button>
-                </div>
-              </div>
+              <p>No tasks available.</p>
             )}
           </div>
         </div>

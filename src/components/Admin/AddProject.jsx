@@ -33,7 +33,17 @@ export const AddProject = () => {
     };
 
     const submitHandler = async (data) => {
+        if (new Date(data.completionDate) <= new Date(data.startDate)) {
+                    toast.error("❌ Completion date must be after the start date!", { position: "top-center" });
+                    return;
+                }
+                const userId = localStorage.getItem("id"); // Make sure "id" matches what you stored
+                    if (!userId) {
+                        toast.error("❌ User ID not found. Please log in again.");
+                        return;
+                    }
         try {
+            data.userId = userId;
             data.estimatedHours = parseInt(data.estimatedHours);
             data.startDate = new Date(data.startDate).toISOString();
             data.completionDate = new Date(data.completionDate).toISOString();

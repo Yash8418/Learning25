@@ -13,12 +13,18 @@ const AddTask = () => {
     totalMinutes: "",
     projectId: "",
     moduleId: "",
+    assignedDevelopers: [],
     statusId: "67eb8d26088dd81c6481659f",
   });
 
   const [projects, setProjects] = useState([]);
   const [modules, setModules] = useState([]);
   const priorities = ["Low", "Medium", "High"];
+  const [developers, setDevelopers] = useState([]);
+  const [filteredDevelopers, setFilteredDevelopers] = useState([]);
+  const [selectedDevelopers, setSelectedDevelopers] = useState([]);
+   
+  
 
   useEffect(() => {
     fetchProjects();
@@ -33,6 +39,12 @@ const AddTask = () => {
     }
   };
 
+    useEffect(() => {
+      if (taskData.projectId) {
+        fetchModules(taskData.projectId);
+      }
+    }, [taskData.projectId, projects]);
+
   const fetchModules = async (projectId) => {
     if (!projectId) {
       setModules([]);
@@ -42,11 +54,29 @@ const AddTask = () => {
       const response = await axios.get(`http://localhost:8000/getProjectModule?projectId=${projectId}`);
       const filteredModules = response.data.filter(module => module.projectId === projectId);
       setModules(filteredModules);
+      const project = projects.find((p) => p._id === projectId);
+
     } catch (error) {
       console.error("Error fetching modules:", error);
     }
   };
 
+
+    useEffect(() => {
+      if (taskData.moduleId) {
+        filterDevelopersByModule(taskData.moduleId);
+      }
+    }, [taskData.moduleId, modules]);
+  
+    const filterDevelopersByModule = (moduleId) => {
+      if (!moduleId) {
+        setFilteredDevelopers([]);
+        return;
+      }
+  
+      const selectedModule = modules.find((mod) => mod._id === moduleId);
+      setFilteredDevelopers(selectedModule?.dev_id || []);
+    };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTaskData((prevData) => ({
@@ -56,9 +86,23 @@ const AddTask = () => {
 
     if (name === "projectId") {
       setModules([]);
+      setFilteredDevelopers([]);
+      setSelectedDevelopers([]);
       fetchModules(value);
     }
+
+    if (name === "moduleId") {
+      setFilteredDevelopers([]);
+      setSelectedDevelopers([]);
+      filterDevelopersByModule(value);
+    }
   };
+
+  const handleDeveloperSelect = (event) => {
+    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    setSelectedDevelopers(selectedOptions);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,6 +110,8 @@ const AddTask = () => {
       alert("Please fill in all required fields!");
       return;
     }
+    const finalTaskData = { ...taskData, assignedDevelopers: selectedDevelopers };
+
 
     try {
       await axios.post("http://localhost:8000/addTask", taskData);
@@ -145,6 +191,27 @@ const AddTask = () => {
               ))}
             </select>
           </div>
+
+          <div className="form-group">
+            <label>Assign Developers:</label>
+            <select
+              multiple
+              className="developer-select"
+              onChange={handleDeveloperSelect}
+              value={selectedDevelopers}
+            >
+              {filteredDevelopers.length === 0 ? (
+                <option value="">No Developers Available</option>
+              ) : (
+                filteredDevelopers.map((dev) => (
+                  <option key={dev._id} value={dev._id}>
+                    {dev.username}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
+
 
           <button type="submit">Add Task</button>
         </form>
