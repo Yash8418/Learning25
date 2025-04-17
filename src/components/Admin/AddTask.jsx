@@ -23,7 +23,7 @@ const AddTask = () => {
   const [developers, setDevelopers] = useState([]);
   const [filteredDevelopers, setFilteredDevelopers] = useState([]);
   const [selectedDevelopers, setSelectedDevelopers] = useState([]);
-   
+  
   
 
   useEffect(() => {
@@ -48,6 +48,8 @@ const AddTask = () => {
   const fetchModules = async (projectId) => {
     if (!projectId) {
       setModules([]);
+      setDevelopers([]);
+      setFilteredDevelopers([]);
       return;
     }
     try {
@@ -55,6 +57,7 @@ const AddTask = () => {
       const filteredModules = response.data.filter(module => module.projectId === projectId);
       setModules(filteredModules);
       const project = projects.find((p) => p._id === projectId);
+      setDevelopers(project?.dev_id || []);
 
     } catch (error) {
       console.error("Error fetching modules:", error);
@@ -114,7 +117,7 @@ const AddTask = () => {
 
 
     try {
-      await axios.post("http://localhost:8000/addTask", taskData);
+      await axios.post("http://localhost:8000/addTask", finalTaskData);
       alert("Task added successfully!");
       // navigate("/admin/getTask");
     } catch (error) {
