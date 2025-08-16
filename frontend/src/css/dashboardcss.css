@@ -1,0 +1,96 @@
+/* Resetting body margins and padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f9fc; /* Slight background tone for contrast */
+}
+
+/* Admin Dashboard Full-Screen Styling */
+.admin-dashboard {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  text-align: center;
+  margin: 20px 0;
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Cards Section */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1 1 300px;
+  max-width: 300px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #444;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Weekly Hours Placeholder */
+.weekly-hours-container {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+  /* .weekly-chart {
+    width: 100%;
+    height: 150px;
+    background: #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+  } */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}

@@ -1,0 +1,172 @@
+/* styles.css */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; /* Ensure full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack navbar and content */
+  /* align-items: center;
+  justify-content: center; */
+}
+
+
+/*  Main Container  */
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    /* Remove min-height */
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px;
+    }
+
+
+
+/* Left Section (Form) */
+.form-container {
+  flex: 1; /* Takes up available space */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1; /* Equally sized tabs */
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}
+
+.tab:not(.active) {
+  background-color: #e0e0e0;
+  color: #888;
+  border-radius: 5px;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 95%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+}
+
+.input-group input::placeholder {
+  color: #666;
+}
+
+/* Button */
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-btn:hover {
+  background-color: #333;
+}
+
+/* Right Section (Info) */
+.info-container {
+  flex: 1; /* Takes up available space */
+  background-color: #222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.info-container img {
+  width: 50px;
+  margin-bottom: 20px;
+}
+
+.info-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.info-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #bbb;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 90%;
+    min-height: auto;
+  }
+
+  .info-container {
+    padding: 20px;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+}

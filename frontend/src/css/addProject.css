@@ -1,0 +1,135 @@
+/* Center the form container */
+.add-project-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff; /* Light background */
+    padding: 20px;
+    
+    box-sizing: border-box;
+ 
+}
+
+
+/* Form Box */
+.add-project-form form {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(20, 24, 32, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7);
+    text-align: left;
+    color: #f8f9fa;
+    margin: 0 auto;
+}
+
+/* Heading */
+.add-project-form h1 {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+     /* color: #212529; Black text for contrast */
+}
+
+/* Form Groups */
+.add-project-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.add-project-form label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #adb5bd; /* Light grey color for labels */
+}
+
+/* Inputs & Textarea */
+.add-project-form input{
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #495057; /* Darker border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff; /* Dark background for inputs */
+    /* color: #fff; White text color */
+    transition: border 0.3s ease-in-out;
+}
+.add-project-form textarea {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #495057; /* Darker border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff; /* Dark background for inputs */
+    color: #495057; /* White text color */
+    transition: border 0.3s ease-in-out;
+    resize: none;
+}
+
+.add-project-form input:focus,
+.add-project-form textarea:focus {
+    border: 1px solid #4caf50; /* Green border focus effect */
+    outline: none;
+}
+
+/* Error Messages */
+.add-project-form .error-message {
+    color: #ff6b6b; /* A more vibrant error color */
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+/* Submit Button */
+.add-project-form .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #212529;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.add-project-form .submit-btn:hover {
+    background: #4caf50; /* Green background on hover */
+    color: #fff;
+}
+
+/* Message Styling */
+.add-project-form .message {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #a7ff83; /* A more suitable color for success messages */
+}
+
+/* Ensure no horizontal scrolling */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+
+
+/* Fix right-side cutoff issue */
+@media (max-width: 600px) {
+    .add-project-form form {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
